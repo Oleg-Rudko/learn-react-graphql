@@ -5,4 +5,4 @@
 ### Here the some instruction for graphql 
   1. If we want to receive data we need to look [link](https://www.apollographql.com/docs/react/data/queries/)
   2. If we need to insert data or update we need to use mutation [link](https://www.apollographql.com/docs/react/data/mutations/)
-  3. Hasura console [link](https://learn-react-graphql.hasura.app/v1/graphql)
+  3. Hasura console [link](https://cloud.hasura.io/project/8bbe863d-e672-44af-8ffb-105657e39e45/console)
