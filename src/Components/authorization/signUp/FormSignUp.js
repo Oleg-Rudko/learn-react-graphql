@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { setUserCredential } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const FormSignUp = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    age: '',
+    age: "",
     city: "",
   });
-
 
   const [addUser] = useMutation(
     gql`
@@ -32,17 +34,28 @@ const FormSignUp = () => {
             password: $password
           }
         ) {
+          returning {
+            age
+            city
+            email
+            name
+            id
+          }
           affected_rows
         }
       }
-    `, {
-      onCompleted: e => {
-        if(e.insert_users.affected_rows === 1) {
+    `,
+    {
+      onCompleted: (e) => {
+        if (e.insert_users.affected_rows === 1) {
+          const result = e.insert_users.returning[0];
           window.localStorage.setItem("isAuth", true);
-          history.push({pathname: "/"});
+          dispatch(setUserCredential(result));
+          history.push({ pathname: "/" });
         }
-      }
-    });
+      },
+    }
+  );
 
   const handleSubmit = (event) => {
     addUser({

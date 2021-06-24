@@ -1,9 +1,9 @@
 import React from "react";
-import Routing from './Components/Routing';
+import Routing from "./Components/Routing";
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className="App">
       <Routing />
     </div>
   );

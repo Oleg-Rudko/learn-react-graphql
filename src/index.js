@@ -8,7 +8,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import reducer from "./redux/reducer";
 import makeApolloClient from "./config";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = makeApolloClient();
 
