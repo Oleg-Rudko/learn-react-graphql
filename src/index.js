@@ -3,14 +3,17 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { ApolloProvider } from "@apollo/client";
 import makeApolloClient from "./config";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const client = makeApolloClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
