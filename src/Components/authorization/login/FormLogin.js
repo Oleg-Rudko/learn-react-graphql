@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { gql, useQuery } from "@apollo/client";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserCredential } from "../../../redux/actions";
 
 const FormLogin = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
   const [isLogin, isSetLogin] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
   const { data } = useQuery(
     gql`
       query IsUsers($email: String!, $password: String!) {
         users(where: { password: { _eq: $password }, email: { _eq: $email } }) {
-          email
-          password
           id
+          email
+          name
+          age
+          city
         }
       }
     `,
@@ -30,14 +37,22 @@ const FormLogin = () => {
       },
     }
   );
-  console.log(data);
+
+  useEffect(() => {
+    if (data?.users[0]) {
+      const result = data.users[0];
+      window.localStorage.setItem("isAuth", true);
+      dispatch(setUserCredential(result));
+      history.push({ pathname: "/" });
+    }
+  }, [data]);
 
   const handleSubmit = (event) => {
     isSetLogin(() => ({
       email: form.email,
       password: form.password,
     }));
-    setForm({email: "", password: ""});
+    setForm({ email: "", password: "" });
     event.preventDefault();
   };
 

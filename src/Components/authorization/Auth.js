@@ -1,13 +1,14 @@
-import React from 'react';
-import MainPage from './../MainPage';
+import React from "react";
+import MainPage from "../MainPage";
 
-const Auth = () => {
-  console.log(typeof localStorage.getItem("isAuth"));
-  return (
-    <div>
-      {JSON.parse(localStorage.getItem("isAuth")) === true ? <div>todo</div> : <MainPage />}
-    </div>
-  )
-}
+const Auth = () => (
+  <>
+    {JSON.parse(localStorage.getItem("isAuth")) ? (
+      <div>todo</div>
+    ) : (
+      <MainPage />
+    )}
+  </>
+);
 
-export default Auth
+export default Auth;

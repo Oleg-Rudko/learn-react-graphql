@@ -1,3 +1,4 @@
 export const initialState = {
-  default: 'default',
+  default: "default",
+  user: {},
 };
