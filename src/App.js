@@ -1,10 +1,12 @@
 import React from "react";
-import Authorization from './Components/authorization/Authorization';
+import Routing from './Components/Routing';
 
 const App = () => {
-  return <div className='App'>
-    <Authorization />
-  </div>;
+  return (
+    <div className='App'>
+      <Routing />
+    </div>
+  );
 };
 
 export default App;

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 const FormSignUp = () => {
+  const history = useHistory();
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    age: 0,
+    age: '',
     city: "",
   });
+
 
   const [addUser] = useMutation(
     gql`
@@ -32,7 +35,14 @@ const FormSignUp = () => {
           affected_rows
         }
       }
-    `);
+    `, {
+      onCompleted: e => {
+        if(e.insert_users.affected_rows === 1) {
+          window.localStorage.setItem("isAuth", true);
+          history.push({pathname: "/"});
+        }
+      }
+    });
 
   const handleSubmit = (event) => {
     addUser({
@@ -44,7 +54,7 @@ const FormSignUp = () => {
         age: form.age,
       },
     });
-    setForm({ name: "", email: "", password: "", age: 0, city: "" });
+    setForm({ name: "", email: "", password: "", age: "", city: "" });
     event.preventDefault();
   };
 
