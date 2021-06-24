@@ -1,8 +1,9 @@
 import React from "react";
+import Authorization from './Components/authorization/Authorization';
 
 const App = () => {
   return <div className='App'>
-    Hello world
+    <Authorization />
   </div>;
 };
 
