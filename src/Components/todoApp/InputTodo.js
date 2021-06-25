@@ -29,8 +29,7 @@ const InputTodo = () => {
     `,
     {
       onCompleted: (e) => {
-
-        console.log("sesseful");
+        console.log("Add todo is successfully");
       },
     }
   );
