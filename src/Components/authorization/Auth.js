@@ -1,10 +1,11 @@
 import React from "react";
 import MainPage from "../MainPage";
+import TodoApp from './../todoApp/TodoApp';
 
 const Auth = () => (
   <>
     {JSON.parse(localStorage.getItem("isAuth")) ? (
-      <div>todo</div>
+      <TodoApp />
     ) : (
       <MainPage />
     )}
