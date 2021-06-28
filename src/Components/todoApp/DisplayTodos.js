@@ -1,13 +1,23 @@
 import React from "react";
+import ButtonRemove from "./buttonsControl/ButtonRemove";
+import TodoItem from './TodoItem';
 
-const DisplayTodos = ({data}) => {
+
+const DisplayTodos = ({data, refetch}) => {
   const arrTodos = data?.todo;
-  console.log(arrTodos);
 
   return (
     <ul>
       {arrTodos?.map(({name, id}) => (
-        <li key={id}>{name}</li>
+        <div key={id}>
+          <TodoItem
+            name={name}
+          />
+          <ButtonRemove
+            id={id}
+            refetch={refetch}
+          />
+        </div>
       ))}
     </ul>
   )

@@ -26,7 +26,10 @@ const TodoApp = () => {
   return (
     <>
       <InputTodo refetch={refetch} />
-      <DisplayTodos data={data} />
+      <DisplayTodos
+        data={data}
+        refetch={refetch}
+      />
     </>
   );
 };
