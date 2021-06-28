@@ -4,7 +4,7 @@ import { useMutation, gql } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { userId } from "../../redux/selectors";
 
-const InputTodo = () => {
+const InputTodo = ({refetch}) => {
   const [todo, setTodo] = useState({
     todoTask: "",
   });
@@ -40,7 +40,7 @@ const InputTodo = () => {
         name: todo.todoTask,
         user_id: getUuid,
       },
-    });
+    }).then(() => refetch());
     setTodo({todoTask: ""});
     event.preventDefault();
   };
