@@ -2,7 +2,6 @@ import React from "react";
 import ButtonRemove from "./buttonsControl/ButtonRemove";
 import TodoItem from './TodoItem';
 
-
 const DisplayTodos = ({data, refetch}) => {
   const arrTodos = data?.todo;
 
