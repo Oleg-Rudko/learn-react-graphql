@@ -13,16 +13,10 @@ const InputTodo = ({refetch}) => {
 
   const [addTodo] = useMutation(
     gql`
-      mutation AddTodo($name: String, $user_id: Int!) {
+      mutation AddTodo($name: String!, $user_id: Int!) {
         insert_todo(
           objects: { user_id: $user_id, name: $name }
         ) {
-          returning {
-            id
-            isActive
-            name
-            user_id
-          }
           affected_rows
         }
       }
