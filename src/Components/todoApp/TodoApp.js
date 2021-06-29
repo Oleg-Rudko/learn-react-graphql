@@ -13,6 +13,7 @@ const TodoApp = () => {
         todo(where: { user_id: { _eq: $user_id } }, order_by: { name: asc }) {
           name
           id
+          isActive
         }
       }
     `,
