@@ -50,6 +50,7 @@ const FormSignUp = () => {
         if (e.insert_users.affected_rows === 1) {
           const result = e.insert_users.returning[0];
           window.localStorage.setItem("isAuth", true);
+          window.localStorage.setItem("user_id", result.id);
           dispatch(setUserCredential(result));
           history.push({ pathname: "/" });
         }

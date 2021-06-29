@@ -43,6 +43,7 @@ const FormLogin = () => {
     if (data?.users[0]) {
       const result = data.users[0];
       window.localStorage.setItem("isAuth", true);
+      window.localStorage.setItem("user_id", result.id);
       dispatch(setUserCredential(result));
       history.push({ pathname: "/" });
     }
