@@ -4,6 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserCredential } from "../../../redux/actions";
+import Loader from "../../Loader";
 
 const FormLogin = () => {
   const history = useHistory();
@@ -18,7 +19,7 @@ const FormLogin = () => {
     password: "",
   });
 
-  const { data } = useQuery(
+  const { data, loading } = useQuery(
     gql`
       query IsUsers($email: String!, $password: String!) {
         users(where: { password: { _eq: $password }, email: { _eq: $email } }) {
@@ -42,9 +43,11 @@ const FormLogin = () => {
     if (data?.users[0]) {
       const result = data.users[0];
       window.localStorage.setItem("isAuth", true);
+      window.localStorage.setItem("user_id", result.id);
       dispatch(setUserCredential(result));
       history.push({ pathname: "/" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const handleSubmit = (event) => {
@@ -64,32 +67,38 @@ const FormLogin = () => {
   };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formGroupEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={form.email}
-            onChange={onHandleInput}
-          />
-        </Form.Group>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formGroupEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={form.email}
+                onChange={onHandleInput}
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={onHandleInput}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
-      </Form>
-    </div>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={onHandleInput}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+        </>
+      )}
+    </>
   );
 };
 

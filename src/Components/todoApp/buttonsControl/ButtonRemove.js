@@ -1,30 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useMutation } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
+import Loader from "./../../Loader";
 
-const ButtonRemove = ({refetch, id}) => {
-  const [removeItemFromHasura] = useMutation(gql`
-    mutation RemoveItemFromHasura($id: uuid!) {
-      delete_todo(where: { id: { _eq: $id } }) {
-        affected_rows
+const ButtonRemove = ({ refetch, id }) => {
+  const [loading, setLoading] = useState(false);
+
+  const [removeItemFromHasura] = useMutation(
+    gql`
+      mutation RemoveItemFromHasura($id: uuid!) {
+        delete_todo(where: { id: { _eq: $id } }) {
+          affected_rows
+        }
       }
-    }
-  `);
+    `
+  );
 
   const removeItem = (id) => {
+    setLoading(true);
     removeItemFromHasura({
       variables: {
-        id
-      }
-    }).then(() => refetch());
+        id,
+      },
+    }).then(() => {
+      refetch().then(() => {
+        setLoading(false);
+      });
+    });
   };
 
   return (
     <>
-      <Button onClick={() => removeItem(id)}>
-        &#x166D;
-      </Button>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Button onClick={() => removeItem(id)}>
+          &#x166D;
+        </Button>
+      )}
     </>
   );
 };

@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { setUserCredential } from "../../../redux/actions";
-import { useDispatch } from "react-redux";
+import { setUserCredential, setLoading } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { spinner } from "../../../redux/selectors";
+import Loader from "../../Loader";
 
 const FormSignUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const loadingPage = useSelector(spinner);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -50,6 +53,7 @@ const FormSignUp = () => {
         if (e.insert_users.affected_rows === 1) {
           const result = e.insert_users.returning[0];
           window.localStorage.setItem("isAuth", true);
+          window.localStorage.setItem("user_id", result.id);
           dispatch(setUserCredential(result));
           history.push({ pathname: "/" });
         }
@@ -58,6 +62,7 @@ const FormSignUp = () => {
   );
 
   const handleSubmit = (event) => {
+    dispatch(setLoading(true));
     addUser({
       variables: {
         name: form.name,
@@ -66,6 +71,8 @@ const FormSignUp = () => {
         city: form.city,
         age: form.age,
       },
+    }).then(() => {
+      dispatch(setLoading(false));
     });
     setForm({ name: "", email: "", password: "", age: "", city: "" });
     event.preventDefault();
@@ -79,71 +86,77 @@ const FormSignUp = () => {
   };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>Your name</Form.Label>
-          <Form.Control
-            placeholder="Your name"
-            onChange={onHandleInput}
-            name="name"
-            value={form.name}
-            tyep="text"
-            required
-          />
-        </Form.Group>
+    <>
+      {loadingPage ? (
+        <Loader />
+      ) : (
+        <div>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Your name</Form.Label>
+              <Form.Control
+                placeholder="Your name"
+                onChange={onHandleInput}
+                name="name"
+                value={form.name}
+                tyep="text"
+                required
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            placeholder="Enter email"
-            onChange={onHandleInput}
-            name="email"
-            value={form.email}
-            type="email"
-            required
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                placeholder="Enter email"
+                onChange={onHandleInput}
+                name="email"
+                value={form.email}
+                type="email"
+                required
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            placeholder="Password"
-            onChange={onHandleInput}
-            name="password"
-            value={form.password}
-            type="password"
-            required
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                placeholder="Password"
+                onChange={onHandleInput}
+                name="password"
+                value={form.password}
+                type="password"
+                required
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Age</Form.Label>
-          <Form.Control
-            placeholder="Enter your age"
-            onChange={onHandleInput}
-            name="age"
-            value={form.age}
-            type="number"
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Age</Form.Label>
+              <Form.Control
+                placeholder="Enter your age"
+                onChange={onHandleInput}
+                name="age"
+                value={form.age}
+                type="number"
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>City</Form.Label>
-          <Form.Control
-            placeholder="Enter your City"
-            onChange={onHandleInput}
-            name="city"
-            type="text"
-            value={form.city}
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                placeholder="Enter your City"
+                onChange={onHandleInput}
+                name="city"
+                type="text"
+                value={form.city}
+              />
+            </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Sign Up
-        </Button>
-      </Form>
-    </div>
+            <Button variant="primary" type="submit">
+              Sign Up
+            </Button>
+          </Form>
+        </div>
+      )}
+    </>
   );
 };
 

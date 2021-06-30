@@ -8,6 +8,14 @@ const reducer = (state = initialState, action) => {
         user: action.user,
       };
     }
+
+    case "SET_LOADING": {
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    }
+
     default: {
       return state;
     }
