@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
-import { useSelector } from "react-redux";
-import { spinner } from "../../../redux/selectors";
 import Loader from "./../../Loader";
 
 const ButtonRemove = ({ refetch, id }) => {
   const [loading, setLoading] = useState(false);
-  const loadingPage = useSelector(spinner);
 
   const [removeItemFromHasura] = useMutation(
     gql`
@@ -37,7 +34,7 @@ const ButtonRemove = ({ refetch, id }) => {
       {loading ? (
         <Loader />
       ) : (
-        <Button onClick={() => removeItem(id)} disabled={loadingPage}>
+        <Button onClick={() => removeItem(id)}>
           &#x166D;
         </Button>
       )}
