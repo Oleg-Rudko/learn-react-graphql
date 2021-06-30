@@ -1,16 +1,17 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./styles/main.css";
 
 const MainPage = () => {
   return (
-    <div>
-      <Link to="/login">
-        <Button variant="outline-info">Login</Button>
-      </Link>
-      <Link to="/sign-up">
-        <Button variant="outline-success">Sing Up</Button>
-      </Link>
+    <div className="mainPage">
+        <Link to="/login">
+          <Button variant="outline-info" className="mainPage_login">Login</Button>
+        </Link>
+        <Link to="/sign-up">
+          <Button variant="outline-success" className="mainPage_sing-up">Sing Up</Button>
+        </Link>
     </div>
   );
 };

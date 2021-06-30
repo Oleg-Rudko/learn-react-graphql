@@ -11,9 +11,9 @@ const DisplayTodos = ({ data, refetch }) => {
   const loading = useSelector(spinner);
 
   return (
-    <ul>
+    <ul className="displayTodo_list">
       {arrTodos?.map(({ name, id, isActive }) => (
-        <div key={id}>
+        <div className="displayTodo_wrap" key={id}>
           <CompletedTodo id={id} refetch={refetch} isActive={isActive} />
           <TodoItem name={name} />
           <ButtonRemove id={id} refetch={refetch} />

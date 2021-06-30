@@ -54,10 +54,10 @@ const InputTodo = ({refetch}) => {
   };
 
   return (
-    <>
+    <div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formGroupEmail">
-          <Form.Label>Enter your todo</Form.Label>
+          <Form.Label className="inputTodo_label">Enter your todo</Form.Label>
           <Form.Control
             placeholder="Todo"
             onChange={onHandleInput}
@@ -69,7 +69,7 @@ const InputTodo = ({refetch}) => {
           />
         </Form.Group>
       </Form>
-    </>
+    </div>
   );
 };
 

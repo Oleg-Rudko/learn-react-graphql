@@ -32,12 +32,17 @@ const ButtonRemove = ({ refetch, id }) => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <div className="btnRemove_loader">
+          <Loader />
+        </div>
       ) : (
-        <Button onClick={() => removeItem(id)}>
+        <button className="btnRemove" onClick={() => removeItem(id)}>
           &#x166D;
-        </Button>
+        </button>
       )}
+      {/* <div className="btnRemove_loader">
+        <Loader />
+      </div> */}
     </>
   );
 };

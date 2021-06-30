@@ -1,0 +1,25 @@
+@import "./authorization.css";
+@import "./todoApp.css";
+
+:root {
+  --main-bg-grey: #333;
+  --main-content-width: 70%;
+}
+
+.mainPage,
+.formLogin_loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainPage {
+  background: var(--main-bg-grey);
+  height: 100vh;
+}
+
+.mainPage_login,
+.mainPage_sing-up {
+  margin: 0 10px;
+  width: 120px;
+}
