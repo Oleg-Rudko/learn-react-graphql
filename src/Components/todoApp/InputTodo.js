@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userId, spinner } from "../../redux/selectors";
 import { setLoading } from "../../redux/actions";
 
-const InputTodo = ({refetch}) => {
+const InputTodo = ({ refetch }) => {
   const [todo, setTodo] = useState({
     todoTask: "",
   });
@@ -17,19 +17,11 @@ const InputTodo = ({refetch}) => {
   const [addTodo] = useMutation(
     gql`
       mutation AddTodo($name: String!, $user_id: Int!) {
-        insert_todo(
-          objects: { user_id: $user_id, name: $name }
-        ) {
+        insert_todo(objects: { user_id: $user_id, name: $name }) {
           affected_rows
         }
       }
-    `,
-    {
-      onCompleted: (e) => {
-        console.log("Add todo is successfully");
-      },
-    }
-  );
+    `);
 
   const handleSubmit = (event) => {
     dispatch(setLoading(true));
@@ -38,11 +30,13 @@ const InputTodo = ({refetch}) => {
         name: todo.todoTask,
         user_id: getUuid,
       },
-    }).then(() => refetch().then(() => {
-      dispatch(setLoading(false));
-    }));
+    }).then(() =>
+      refetch().then(() => {
+        dispatch(setLoading(false));
+      })
+    );
 
-    setTodo({todoTask: ""});
+    setTodo({ todoTask: "" });
     event.preventDefault();
   };
 

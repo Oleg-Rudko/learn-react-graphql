@@ -4,7 +4,6 @@ import SignUp from './authorization/signUp/SignUp';
 import Login from './authorization/login/Login';
 import Auth from './authorization/Auth';
 
-
 const Routing = () => {
   return (
     <>

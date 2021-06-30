@@ -47,8 +47,7 @@ const FormLogin = () => {
       dispatch(setUserCredential(result));
       history.push({ pathname: "/" });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, history, dispatch]);
 
   const handleSubmit = (event) => {
     isSetLogin(() => ({

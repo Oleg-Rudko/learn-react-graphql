@@ -8,6 +8,7 @@ import { Loader } from "../Loader";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
+  
   const { data, refetch, loading } = useQuery(
     gql`
       query MyTodos($user_id: Int!) {
@@ -29,9 +30,7 @@ const TodoApp = () => {
     <div className="todoApp">
       <div className="todoApp_wrap">
         <InputTodo refetch={refetch} />
-
         <div className="todoApp_displayTodo">
-
           {loading ? (
             <div className="todoApp_loader">
               <Loader />
@@ -39,8 +38,7 @@ const TodoApp = () => {
           ) : (
             <DisplayTodos data={data} refetch={refetch} />
           )}
-          
-        </div>
+          </div>
       </div>
     </div>
   );

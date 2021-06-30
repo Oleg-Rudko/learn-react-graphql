@@ -16,7 +16,7 @@
   color: #fff;
 }
 
-.formLogin_loader, 
+.formLogin_loader,
 .formSingUp_loader {
   background: var(--main-bg-grey);
   height: 100vh;

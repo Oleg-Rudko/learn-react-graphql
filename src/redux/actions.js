@@ -6,4 +6,4 @@ export const setUserCredential = (user) => ({
 export const setLoading = (value) => ({
   type: "SET_LOADING",
   loading: value,
-})
+});
