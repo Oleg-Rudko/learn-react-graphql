@@ -1,0 +1,23 @@
+.pageForm_login,
+.pageForm_sign-up {
+  background: var(--main-bg-grey);
+}
+
+.formLogin,
+.formSignUp {
+  width: var(--main-content-width);
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 110px;
+}
+
+.formLogin_label,
+.formSignUp_lable {
+  color: #fff;
+}
+
+.formLogin_loader, 
+.formSingUp_loader {
+  background: var(--main-bg-grey);
+  height: 100vh;
+}

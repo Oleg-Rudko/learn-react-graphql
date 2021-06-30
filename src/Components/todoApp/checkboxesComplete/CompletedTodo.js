@@ -24,15 +24,16 @@ const CompletedTodo = ({ id, refetch, isActive }) => {
   };
 
   return (
-    <>
+    <div className="completedCheckbox">
       <input
         checked={isActive}
         type="checkbox"
         id={id}
         onChange={complete}
+        className="inputCheckbox"
         // value={isActive}
       />
-    </>
+    </div>
   );
 };
 

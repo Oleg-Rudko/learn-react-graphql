@@ -26,10 +26,23 @@ const TodoApp = () => {
   );
 
   return (
-    <>
-      <InputTodo refetch={refetch} />
-      {loading ? <Loader /> : <DisplayTodos data={data} refetch={refetch} />}
-    </>
+    <div className="todoApp">
+      <div className="todoApp_wrap">
+        <InputTodo refetch={refetch} />
+
+        <div className="todoApp_displayTodo">
+
+          {loading ? (
+            <div className="todoApp_loader">
+              <Loader />
+            </div>
+          ) : (
+            <DisplayTodos data={data} refetch={refetch} />
+          )}
+          
+        </div>
+      </div>
+    </div>
   );
 };
 

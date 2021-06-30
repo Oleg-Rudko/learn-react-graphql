@@ -67,14 +67,16 @@ const FormLogin = () => {
   };
 
   return (
-    <>
+    <div className="pageForm_login">
       {loading ? (
-        <Loader />
+        <div className="formLogin_loader">
+          <Loader />
+        </div>
       ) : (
         <>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="formLogin">
             <Form.Group controlId="formGroupEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="formLogin_label">Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -84,7 +86,7 @@ const FormLogin = () => {
             </Form.Group>
 
             <Form.Group controlId="formGroupPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="formLogin_label">Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -98,7 +100,7 @@ const FormLogin = () => {
           </Form>
         </>
       )}
-    </>
+    </div>
   );
 };
 

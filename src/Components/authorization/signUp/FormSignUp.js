@@ -86,14 +86,16 @@ const FormSignUp = () => {
   };
 
   return (
-    <>
+    <div className="pageForm_sign-up">
       {loadingPage ? (
-        <Loader />
+        <div className="formSingUp_loader">
+        < Loader />
+        </div>
       ) : (
         <div>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="formSignUp">
             <Form.Group>
-              <Form.Label>Your name</Form.Label>
+              <Form.Label className="formSignUp_lable">Your name</Form.Label>
               <Form.Control
                 placeholder="Your name"
                 onChange={onHandleInput}
@@ -105,7 +107,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="formSignUp_lable">Email address</Form.Label>
               <Form.Control
                 placeholder="Enter email"
                 onChange={onHandleInput}
@@ -117,7 +119,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="formSignUp_lable">Password</Form.Label>
               <Form.Control
                 placeholder="Password"
                 onChange={onHandleInput}
@@ -129,7 +131,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Age</Form.Label>
+              <Form.Label className="formSignUp_lable">Age</Form.Label>
               <Form.Control
                 placeholder="Enter your age"
                 onChange={onHandleInput}
@@ -140,7 +142,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>City</Form.Label>
+              <Form.Label className="formSignUp_lable">City</Form.Label>
               <Form.Control
                 placeholder="Enter your City"
                 onChange={onHandleInput}
@@ -156,7 +158,7 @@ const FormSignUp = () => {
           </Form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
