@@ -40,6 +40,11 @@
   margin-bottom: 15px;
 }
 
+.completedTodo_loader {
+  margin: 0 22px 0 4px;
+  width: 15px;
+  height: 15px;
+}
 .completedCheckbox {
   width: 30px;
   display: flex;

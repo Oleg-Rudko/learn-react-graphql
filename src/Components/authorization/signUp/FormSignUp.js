@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { setUserCredential, setLoading } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { spinner } from "../../../redux/selectors";
-import Loader from "../../Loader";
+import { Loader } from "../../Loader";
 
 const FormSignUp = () => {
   const history = useHistory();
@@ -89,7 +89,7 @@ const FormSignUp = () => {
     <div className="pageForm_sign-up">
       {loadingPage ? (
         <div className="formSingUp_loader">
-        < Loader />
+          <Loader />
         </div>
       ) : (
         <div>
@@ -107,7 +107,9 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label className="formSignUp_lable">Email address</Form.Label>
+              <Form.Label className="formSignUp_lable">
+                Email address
+              </Form.Label>
               <Form.Control
                 placeholder="Enter email"
                 onChange={onHandleInput}

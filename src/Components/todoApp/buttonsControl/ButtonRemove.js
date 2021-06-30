@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
-import Loader from "./../../Loader";
+import { Loader } from "./../../Loader";
 
 const ButtonRemove = ({ refetch, id }) => {
   const [loading, setLoading] = useState(false);

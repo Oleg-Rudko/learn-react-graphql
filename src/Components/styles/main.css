@@ -7,7 +7,8 @@
 }
 
 .mainPage,
-.formLogin_loader {
+.formLogin_loader,
+.completedTodo_loader {
   display: flex;
   align-items: center;
   justify-content: center;

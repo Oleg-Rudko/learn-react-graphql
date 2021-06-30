@@ -4,7 +4,7 @@ import InputTodo from "./InputTodo";
 import { useQuery, gql } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { userId } from "../../redux/selectors";
-import Loader from "../Loader";
+import { Loader } from "../Loader";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
