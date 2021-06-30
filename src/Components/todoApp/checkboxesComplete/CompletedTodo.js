@@ -30,6 +30,7 @@ const CompletedTodo = ({ id, refetch, isActive }) => {
         type="checkbox"
         id={id}
         onChange={complete}
+        className="inputCheckbox"
         // value={isActive}
       />
     </div>
