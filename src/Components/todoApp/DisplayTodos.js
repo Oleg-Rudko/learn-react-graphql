@@ -18,7 +18,8 @@ const DisplayTodos = ({ data, refetch }) => {
           <TodoItem name={name} />
           <ButtonRemove id={id} refetch={refetch} />
         </div>
-      ))}
+      ))};
+      
       {loading && <Loader />}
     </ul>
   );

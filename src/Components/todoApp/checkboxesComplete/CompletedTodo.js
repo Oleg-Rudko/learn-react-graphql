@@ -4,6 +4,7 @@ import { LoaderSm } from "./../../Loader";
 
 const CompletedTodo = ({ id, refetch, isActive }) => {
   const [onComplete, setOnComplete] = useState(false);
+
   const [completeItemTodo] = useMutation(gql`
     mutation CompleteItemTodo($id: uuid!, $isActive: Boolean!) {
       update_todo(where: { id: { _eq: $id } }, _set: { isActive: $isActive }) {
@@ -44,7 +45,6 @@ const CompletedTodo = ({ id, refetch, isActive }) => {
             id={id}
             onChange={complete}
             className="inputCheckbox"
-            // value={isActive}
           />
         </div>
       )}

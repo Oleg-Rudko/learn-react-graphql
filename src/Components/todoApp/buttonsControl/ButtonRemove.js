@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
 import { Loader } from "./../../Loader";
 
@@ -40,9 +39,6 @@ const ButtonRemove = ({ refetch, id }) => {
           &#x166D;
         </button>
       )}
-      {/* <div className="btnRemove_loader">
-        <Loader />
-      </div> */}
     </>
   );
 };
