@@ -11,17 +11,17 @@ const DisplayTodos = ({ data, refetch }) => {
   const loading = useSelector(spinner);
 
   return (
-    <ul className="displayTodo_list">
+    <div className="displayTodo_list">
       {arrTodos?.map(({ name, id, isActive }) => (
         <div className="displayTodo_wrap" key={id}>
           <CompletedTodo id={id} refetch={refetch} isActive={isActive} />
-          <TodoItem name={name} />
+          <TodoItem name={name} id={id} refetch={refetch} />
           <ButtonRemove id={id} refetch={refetch} />
         </div>
-      ))};
+      ))}
       
       {loading && <Loader />}
-    </ul>
+    </div>
   );
 };
 

@@ -58,10 +58,24 @@
   height: 15px;
 }
 
+.loaderTodoItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 26px;
+}
+
+.formTodoItem {
+  width: 100%;
+}
+
 .todoItem {
   width: 100%;
-  color: #ffffff57;
+  background: #404040;
   list-style: none;
+  color: #888;
+  border: none;
+  outline: none;
 }
 
 .btnRemove_loader {
