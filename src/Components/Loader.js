@@ -1,21 +1,14 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
 
-export const Loader = () => <Spinner animation="border" variant="success" />;
-
-export const LoaderSm = () => <Spinner animation="border" variant="info" size="sm" />;
-
-export const Loading = () => {
+const Loader = ({ animation, variant, size }) => {
   return (
-    <>
-      <Spinner
-        as="span"
-        animation="grow"
-        size="sm"
-        role="status"
-        aria-hidden="true"
-      />
-      <span>Loading...</span>
-    </>
+    <Spinner
+      animation={animation}
+      variant={variant}
+      size={size}
+    />
   );
 };
+
+export default Loader;

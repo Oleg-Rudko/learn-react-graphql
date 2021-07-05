@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import { Loader } from "./../../Loader";
+import Loader from "./../../Loader";
 
 const ButtonRemove = ({ refetch, id }) => {
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const ButtonRemove = ({ refetch, id }) => {
     <>
       {loading ? (
         <div className="btnRemove_loader">
-          <Loader />
+          <Loader animation="border" variant="danger" />
         </div>
       ) : (
         <button className="btnRemove" onClick={() => removeItem(id)}>

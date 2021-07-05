@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
-import { LoaderSm } from "./../../Loader";
+import Loader from "../../Loader";
 
 const CompletedTodo = ({ id, refetch, isActive }) => {
   const [onComplete, setOnComplete] = useState(false);
@@ -35,7 +35,7 @@ const CompletedTodo = ({ id, refetch, isActive }) => {
     <>
       {onComplete ? (
         <div className="completedTodo_loader">
-          <LoaderSm />
+          <Loader animation="border" variant="info" size="sm" />
         </div>
       ) : (
         <div className="completedCheckbox">

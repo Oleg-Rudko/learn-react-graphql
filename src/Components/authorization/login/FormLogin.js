@@ -4,7 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserCredential } from "../../../redux/actions";
-import { Loader } from "../../Loader";
+import Loader from "../../Loader";
 
 const FormLogin = () => {
   const history = useHistory();
@@ -69,7 +69,7 @@ const FormLogin = () => {
     <div className="pageForm_login">
       {loading ? (
         <div className="formLogin_loader">
-          <Loader />
+          <Loader animation="border" variant="success" />
         </div>
       ) : (
         <>
