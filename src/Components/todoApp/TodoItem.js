@@ -4,26 +4,17 @@ import Loader from "../Loader";
 
 const TodoItem = ({ name, id, refetch }) => {
   const [todoItemControl, setTodoItemControl] = useState({
-    disabledItem: true,
+    disabledItem: false,
     loading: false,
     editName: name,
   });
 
-  let savePrevName = name;
-  let countClicks = 0;
-
-  const dblclick = () => {
-    if (countClicks !== 2) {
-      countClicks += 1;
-      setTimeout(() => {
-        countClicks = 0;
-      }, 700);
-    }
-
-    if (countClicks === 2 && todoItemControl !== false) {
+  const dblclick = (e) => {
+    if (!todoItemControl.disabledItem) {
+      console.log(e);
       setTodoItemControl((prev) => ({
         ...prev,
-        disabledItem: false,
+        disabledItem: true,
       }));
     }
   };
@@ -54,16 +45,18 @@ const TodoItem = ({ name, id, refetch }) => {
         refetch().then(() => {
           setTodoItemControl((prev) => ({
             ...prev,
-            disabledItem: true,
+            disabledItem: false,
             loading: false,
           }));
         });
       });
-    } else if (todoItemControl.editName === "") {
+    }
+
+    if (todoItemControl.editName === "") {
       setTodoItemControl((prev) => ({
         ...prev,
-        editName: savePrevName,
-        disabledItem: true,
+        editName: name,
+        disabledItem: false,
       }));
     }
     e.preventDefault();
@@ -74,6 +67,14 @@ const TodoItem = ({ name, id, refetch }) => {
       ...prev,
       editName: e.target.value,
     }));
+
+    if (e.keyCode === 27) {
+      setTodoItemControl((prev) => ({
+        ...prev,
+        editName: name,
+        disabledItem: false,
+      }));
+    }
   };
 
   return (
@@ -85,15 +86,16 @@ const TodoItem = ({ name, id, refetch }) => {
         </div>
       ) : (
         <form
-          onClick={dblclick}
+          onDoubleClick={dblclick}
           onSubmit={submitEditTodoItem}
           className="formTodoItem"
         >
           <input
             type="text"
             className="todoItem"
-            disabled={todoItemControl.disabledItem}
+            disabled={!todoItemControl.disabledItem}
             onChange={onHandleInput}
+            onKeyDown={onHandleInput}
             value={todoItemControl.editName}
           />
         </form>
