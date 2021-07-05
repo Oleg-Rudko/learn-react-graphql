@@ -4,13 +4,12 @@ import InputTodo from "./InputTodo";
 import { useQuery, gql } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { getFilterTodos, userId } from "../../redux/selectors";
-import { Loader } from "../Loader";
+import Loader from "../Loader";
 import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
   const getFilterName = useSelector(getFilterTodos);
-  let showingReceivedTodos = getFilterName;
 
   const { data, refetch, loading } = useQuery(
     gql`
@@ -28,7 +27,7 @@ const TodoApp = () => {
     {
       variables: {
         user_id: getUserId,
-        isActive: showingReceivedTodos,
+        isActive: getFilterName,
       },
       fetchPolicy: "network-only",
     }
@@ -41,7 +40,7 @@ const TodoApp = () => {
         <div className="todoApp_displayTodo">
           {loading ? (
             <div className="todoApp_loader">
-              <Loader />
+              <Loader animation="border" variant="success" />
             </div>
           ) : (
             <DisplayTodos data={data} refetch={refetch} />

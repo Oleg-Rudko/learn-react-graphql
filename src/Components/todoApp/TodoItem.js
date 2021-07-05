@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import { Loading } from "../Loader";
+import Loader from "../Loader";
 
 const TodoItem = ({ name, id, refetch }) => {
   const [todoItemControl, setTodoItemControl] = useState({
@@ -80,7 +80,8 @@ const TodoItem = ({ name, id, refetch }) => {
     <>
       {todoItemControl.loading ? (
         <div className="loaderTodoItem">
-          <Loading />
+          <Loader animation="grow" variant="secondary" size="sm" />
+          <span>Loading...</span>
         </div>
       ) : (
         <form

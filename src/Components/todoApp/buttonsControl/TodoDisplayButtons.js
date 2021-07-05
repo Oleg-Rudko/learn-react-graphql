@@ -3,7 +3,7 @@ import { ButtonGroup, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { changeFilterName } from "./../../../redux/actions";
 
-const TodoDisplayButtons = ({ dataTodos }) => {
+const TodoDisplayButtons = () => {
   const dispatch = useDispatch();
 
   return (
