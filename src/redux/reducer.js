@@ -13,7 +13,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.loading,
-      }
+      };
+    }
+
+    case "CHANGE_FILTER_NAME": {
+      return {
+        ...state,
+        filterTodos: action.value,
+      };
     }
 
     default: {
