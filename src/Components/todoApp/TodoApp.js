@@ -30,6 +30,7 @@ const TodoApp = () => {
         user_id: getUserId,
         isActive: showingReceivedTodos,
       },
+      fetchPolicy: "network-only",
     }
   );
 
