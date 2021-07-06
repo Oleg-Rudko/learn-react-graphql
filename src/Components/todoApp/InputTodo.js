@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
-import { userId, spinner } from "../../redux/selectors";
+import { spinner, getAssignmentsId } from "../../redux/selectors";
 import { setLoading } from "../../redux/actions";
 
 const InputTodo = ({ refetch }) => {
@@ -10,25 +10,26 @@ const InputTodo = ({ refetch }) => {
     todoTask: "",
   });
 
-  const getUuid = useSelector(userId);
+  const assignmentsId = useSelector(getAssignmentsId);
   const dispatch = useDispatch();
   const loading = useSelector(spinner);
 
   const [addTodo] = useMutation(
     gql`
-      mutation AddTodo($name: String!, $user_id: Int!) {
-        insert_todo(objects: { user_id: $user_id, name: $name }) {
+      mutation AddTodo($name: String!, $assignments_id: Int!) {
+        insert_todo(objects: { assignments_id: $assignments_id, name: $name }) {
           affected_rows
         }
       }
-    `);
+    `
+  );
 
   const handleSubmit = (event) => {
     dispatch(setLoading(true));
     addTodo({
       variables: {
         name: todo.todoTask,
-        user_id: getUuid,
+        assignments_id: assignmentsId,
       },
     }).then(() =>
       refetch().then(() => {

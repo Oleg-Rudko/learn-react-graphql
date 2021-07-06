@@ -15,7 +15,10 @@ const TodoApp = () => {
     gql`
       query MyTodos($user_id: Int!, $isActive: [Boolean!]) {
         todo(
-          where: { user_id: { _eq: $user_id }, isActive: { _in: $isActive } }
+          where: {
+            assignments: { user_id: { _eq: $user_id } }
+            isActive: { _in: $isActive }
+          }
           order_by: { name: asc }
         ) {
           name
