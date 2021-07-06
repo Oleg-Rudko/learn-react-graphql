@@ -19,6 +19,19 @@ const FormSignUp = () => {
     city: "",
   });
 
+  const [addAssignments] = useMutation(
+    gql`
+      mutation AddAssignments($has_many_todo_id: Int!, $user_id: Int!) {
+        update_assignments(
+          where: { user_id: { _eq: $user_id } }
+          _set: { has_many_todo_id: $has_many_todo_id }
+        ) {
+          affected_rows
+        }
+      }
+    `
+  );
+
   const [addUser] = useMutation(
     gql`
       mutation AddUser(
@@ -35,6 +48,7 @@ const FormSignUp = () => {
             email: $email
             name: $name
             password: $password
+            assignments: { data: {} }
           }
         ) {
           returning {
@@ -43,6 +57,9 @@ const FormSignUp = () => {
             email
             name
             id
+            assignments {
+              id
+            }
           }
           affected_rows
         }
@@ -50,8 +67,15 @@ const FormSignUp = () => {
     `,
     {
       onCompleted: (e) => {
-        if (e.insert_users.affected_rows === 1) {
+        if (e.insert_users.affected_rows === 2) {
           const result = e.insert_users.returning[0];
+          const assignments_id = result.assignments[0].id;
+          addAssignments({
+            variables: {
+              user_id: result.id,
+              has_many_todo_id: assignments_id,
+            },
+          });
           window.localStorage.setItem("isAuth", true);
           window.localStorage.setItem("user_id", result.id);
           dispatch(setUserCredential(result));

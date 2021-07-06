@@ -17,6 +17,9 @@ const Auth = () => {
           email
           id
           name
+          assignments {
+            id
+          }
         }
       }
     `,
@@ -30,7 +33,15 @@ const Auth = () => {
   useEffect(() => {
     if (data?.users[0]) {
       const result = data.users[0];
-      dispatch(setUserCredential(result));
+      const assignments = result.assignments[0];
+      dispatch(
+        setUserCredential({
+          ...result,
+          assignments: {
+            ...assignments,
+          },
+        })
+      );
     }
   }, [data, dispatch]);
 
