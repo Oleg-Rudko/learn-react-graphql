@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 import { spinner } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import Loader from "../Loader";
+import ButtonComment from "./buttonsControl/ButtonComment";
 
 const DisplayTodos = ({ data, refetch }) => {
   const arrTodos = data?.todo;
@@ -17,6 +18,7 @@ const DisplayTodos = ({ data, refetch }) => {
           <CompletedTodo id={id} refetch={refetch} isActive={isActive} />
           <TodoItem name={name} id={id} refetch={refetch} />
           <ButtonRemove id={id} refetch={refetch} />
+          <ButtonComment todoId={id} />
         </div>
       ))}
 
