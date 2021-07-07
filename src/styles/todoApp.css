@@ -78,6 +78,21 @@
   outline: none;
 }
 
+.showComments {
+  width: 45px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  background: transparent;
+  align-items: center;
+}
+
+.showComments_img {
+  width: 100%;
+  height: 100%;
+}
+
 .btnRemove_loader {
   width: 30px;
   height: 30px;
@@ -86,15 +101,15 @@
 .btnRemove {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  border: 1px solid #ffffff3b;
+  border: none;
   color: #ffffff3b;
   background: transparent;
+  padding: 0;
 }
 
-.btnRemove:hover {
-  border: 1px solid #ffffff94;
-  color: #ffffff94;
+.btnRemove_img {
+  width: 100%;
+  height: 100%;
 }
 
 .todoDisplayButtons {
