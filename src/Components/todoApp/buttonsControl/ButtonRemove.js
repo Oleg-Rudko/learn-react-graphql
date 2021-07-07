@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Loader from "./../../Loader";
+import Remove from "../../../img/remove.svg";
 
 const ButtonRemove = ({ refetch, id }) => {
   const [loading, setLoading] = useState(false);
@@ -35,8 +36,8 @@ const ButtonRemove = ({ refetch, id }) => {
           <Loader animation="border" variant="danger" />
         </div>
       ) : (
-        <button className="btnRemove" onClick={() => removeItem(id)}>
-          &#x166D;
+        <button className="btnRemove" onClick={() => removeItem(id)} title="Are You sure want to delete it?">
+          <img className="btnRemove_img" src={Remove} alt="Remove todo item" />
         </button>
       )}
     </>

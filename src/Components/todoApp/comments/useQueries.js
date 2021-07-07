@@ -20,6 +20,7 @@ export const useQueryTodo = (options) => {
   );
 
   return {
+    loading: result.loading,
     refetch: result.refetch,
     todoName: result?.data?.todo[0].name || "",
     comments: result?.data?.todo[0].comments || [],

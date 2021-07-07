@@ -17,8 +17,8 @@ const DisplayTodos = ({ data, refetch }) => {
         <div className="displayTodo_wrap" key={id}>
           <CompletedTodo id={id} refetch={refetch} isActive={isActive} />
           <TodoItem name={name} id={id} refetch={refetch} />
-          <ButtonRemove id={id} refetch={refetch} />
           <ButtonComment todoId={id} />
+          <ButtonRemove id={id} refetch={refetch} />
         </div>
       ))}
 
