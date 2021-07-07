@@ -29,7 +29,7 @@ const Comments = () => {
 
             {comments.map((item) => (
               <div key={item.id}>
-                <CommentCard dataComment={item} />
+                <CommentCard dataComment={item} refetch={refetch} />
               </div>
             ))}
 
