@@ -53,10 +53,6 @@
   color: #ae4d4d;
 }
 
-.commentCard_description-btn:hover {
-  cursor: not-allowed;
-}
-
 .commentCard_date-created {
   color: #888;
   font-style: italic;
