@@ -22,7 +22,11 @@ const DisplayTodos = ({ data, refetch }) => {
         </div>
       ))}
 
-      {loading && <Loader animation="border" variant="success" />}
+      {loading && (
+        <div className="displayTodo_loader">
+          <Loader animation="border" variant="success" />
+        </div>
+      )}
     </div>
   );
 };
