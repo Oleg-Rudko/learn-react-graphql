@@ -8,8 +8,11 @@ const ButtonRemove = ({ refetch, id }) => {
 
   const [removeItemFromHasura] = useMutation(
     gql`
-      mutation RemoveItemFromHasura($id: uuid!) {
+      mutation RemoveItemFromHasura($id: uuid!, $todo_id: uuid!) {
         delete_todo(where: { id: { _eq: $id } }) {
+          affected_rows
+        }
+        delete_comments(where: { todo_id: { _eq: $todo_id } }) {
           affected_rows
         }
       }
@@ -21,6 +24,7 @@ const ButtonRemove = ({ refetch, id }) => {
     removeItemFromHasura({
       variables: {
         id,
+        todo_id: id,
       },
     }).then(() => {
       refetch().then(() => {
