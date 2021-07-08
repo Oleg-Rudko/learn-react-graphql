@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
+import { setLoading } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const AddComment = ({ todoId, refetch }) => {
   const [comment, setComment] = useState("");
+  const dispatch = useDispatch();
 
   const [addComment] = useMutation(
     gql`
@@ -18,12 +21,17 @@ const AddComment = ({ todoId, refetch }) => {
   );
 
   const handleSubmit = (event) => {
+    dispatch(setLoading(true));
     addComment({
       variables: {
         todo_id: todoId,
         description: comment,
       },
-    }).then(() => refetch());
+    }).then(() =>
+      refetch().then(() => {
+        dispatch(setLoading(false));
+      })
+    );
     setComment("");
     event.preventDefault();
   };

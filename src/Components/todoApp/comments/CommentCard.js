@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router";
+import Loader from "../../Loader";
 
 const CommentCard = ({ dataComment, refetch }) => {
-  const {id} = useParams();
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
   const [removeComment] = useMutation(
     gql`
       mutation RemoveComments($todo_id: uuid, $id: uuid!) {
@@ -17,12 +19,17 @@ const CommentCard = ({ dataComment, refetch }) => {
   );
 
   const removeCommentTodo = () => {
+    setLoading(true);
     removeComment({
       variables: {
         id: dataComment.id,
         todo_id: id,
       },
-    }).then(() => refetch());
+    }).then(() =>
+      refetch().then(() => {
+        setLoading(false);
+      })
+    );
   };
 
   return (
@@ -31,12 +38,18 @@ const CommentCard = ({ dataComment, refetch }) => {
         <div className="commentCard_description-text">
           {dataComment.description}
         </div>
-        <button
-          onClick={removeCommentTodo}
-          className="commentCard_description-btn"
-        >
-          x
-        </button>
+        {loading ? (
+          <div className="commentCard_description-loader">
+            <Loader animation="border" variant="danger" size="sm" />
+          </div>
+        ) : (
+          <button
+            onClick={removeCommentTodo}
+            className="commentCard_description-btn"
+          >
+            x
+          </button>
+        )}
       </div>
       <p className="commentCard_date-created">
         Was created {dataComment.date_created}

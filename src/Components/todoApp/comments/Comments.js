@@ -5,9 +5,12 @@ import AddComment from "./AddComment";
 import BtnReturnsBackToTodoList from "./BtnReturnsBackToTodoList";
 import Loader from "../../Loader";
 import CommentCard from "./CommentCard";
+import { spinner } from "../../../redux/selectors";
+import { useSelector } from "react-redux";
 
 const Comments = () => {
   const { id } = useParams();
+  const loader = useSelector(spinner);
   const { todoName, comments, refetch, loading } = useQueryTodo({
     variables: { id: id },
   });
@@ -32,6 +35,12 @@ const Comments = () => {
                 <CommentCard dataComment={item} refetch={refetch} />
               </div>
             ))}
+
+            {loader && (
+              <div className="commentsComponent_loader">
+                <Loader animation="border" variant="success" />
+              </div>
+            )}
 
             <AddComment todoId={id} refetch={refetch} />
             <BtnReturnsBackToTodoList />

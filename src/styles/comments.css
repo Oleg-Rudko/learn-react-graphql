@@ -29,7 +29,8 @@
   color: #b6b6b6;
 }
 
-.commentCard {
+.commentCard,
+.commentsComponent_loader {
   border: 1px solid #fff;
   background: #5556;
   margin-bottom: 20px;
@@ -47,13 +48,27 @@
   color: #888;
 }
 
+.commentCard_description-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .commentCard_description-btn {
   border: none;
   background: transparent;
   color: #ae4d4d;
+  line-height: 0;
 }
 
 .commentCard_date-created {
   color: #888;
   font-style: italic;
+}
+
+.commentsComponent_loader {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
