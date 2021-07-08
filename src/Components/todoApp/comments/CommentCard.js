@@ -3,6 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router";
 import Loader from "../../Loader";
 import CommentDescription from "./CommentDescription";
+import Close from "../../../img/close.svg"
 
 const CommentCard = ({ dataComment, refetch }) => {
   const [loading, setLoading] = useState(false);
@@ -46,9 +47,9 @@ const CommentCard = ({ dataComment, refetch }) => {
         ) : (
           <button
             onClick={removeCommentTodo}
-            className="commentCard_description-btn"
+            className="commentRemove_btn"
           >
-            x
+            <img className="commentRemove_img" src={Close} alt="Remove comment" />
           </button>
         )}
       </div>

@@ -52,13 +52,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 5px 8px 5px;
 }
 
-.commentCard_description-btn {
+.commentRemove_btn {
   border: none;
   background: transparent;
   color: #ae4d4d;
   line-height: 0;
+}
+
+.commentRemove_img {
+  width: 20px;
+  height: 20px;
 }
 
 .commentCard_date-created {
