@@ -6,6 +6,7 @@ import { spinner } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import Loader from "../Loader";
 import ButtonComment from "./buttonsControl/ButtonComment";
+import CommentsCount from './CommentsCount';
 
 const DisplayTodos = ({ data, refetch }) => {
   const arrTodos = data?.todo;
@@ -17,6 +18,7 @@ const DisplayTodos = ({ data, refetch }) => {
         <div className="displayTodo_wrap" key={id}>
           <CompletedTodo id={id} refetch={refetch} isActive={isActive} />
           <TodoItem name={name} id={id} refetch={refetch} />
+          <CommentsCount todoId={id} />
           <ButtonComment todoId={id} />
           <ButtonRemove id={id} refetch={refetch} />
         </div>

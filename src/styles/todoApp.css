@@ -86,6 +86,23 @@
   outline: none;
 }
 
+.commentsCount_loader {
+  width: 30px;
+  height: 30px;
+}
+
+.commentsCount {
+  border-radius: 50%;
+  background: #6c757d;
+  width: 38px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  user-select: none;
+}
+
 .showComments {
   width: 45px;
   height: 35px;
