@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router";
 import Loader from "../../Loader";
+import CommentDescription from "./CommentDescription";
 
 const CommentCard = ({ dataComment, refetch }) => {
   const [loading, setLoading] = useState(false);
@@ -35,9 +36,9 @@ const CommentCard = ({ dataComment, refetch }) => {
   return (
     <div className="commentCard">
       <div className="commentCard_description">
-        <div className="commentCard_description-text">
-          {dataComment.description}
-        </div>
+
+        <CommentDescription dataComment={dataComment} todoId={id} refetch={refetch} />
+
         {loading ? (
           <div className="commentCard_description-loader">
             <Loader animation="border" variant="danger" size="sm" />
