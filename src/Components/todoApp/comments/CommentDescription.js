@@ -18,7 +18,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
     }
   };
 
-  const [editTodoItemToHasura] = useMutation(gql`
+  const [editComment] = useMutation(gql`
     mutation EditComment(
       $todo_id: uuid!
       $id: uuid!
@@ -38,13 +38,13 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
     }
   `);
 
-  const submitEditTodoItem = (e) => {
+  const submitCommentUpdate  = (e) => {
     if (edtiComment.editDescription !== "") {
       setEditComment((prev) => ({
         ...prev,
         loading: true,
       }));
-      editTodoItemToHasura({
+      editComment({
         variables: {
           id: dataComment.id,
           todo_id: todoId,
@@ -96,7 +96,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
       ) : (
         <form
           onDoubleClick={dblclick}
-          onSubmit={submitEditTodoItem}
+          onSubmit={submitCommentUpdate }
           className="formTodoItem"
         >
           <input
