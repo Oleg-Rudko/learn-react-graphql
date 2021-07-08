@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Loader from "../Loader";
+import ButtonShowComments from "./buttonsControl/ButtonShowComments";
 
 const CommentsCount = ({ todoId }) => {
   const { data, loading } = useQuery(
@@ -27,10 +28,13 @@ const CommentsCount = ({ todoId }) => {
           <Loader animation="grow" variant="secondary" />
         </div>
       ) : (
-        <div className="commentsCount" title="Left comments">
-          {countComment}
-        </div>
+        <>
+          <div className={`commentsCount ${countComment && "showComments_is"}`} title="Left comments">
+            {countComment}
+          </div>
+        </>
       )}
+      <ButtonShowComments todoId={todoId} countComment={countComment} />
     </>
   );
 };

@@ -91,7 +91,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
       {edtiComment.loading ? (
         <div className="loaderTodoItem">
           <Loader animation="grow" variant="secondary" size="sm" />
-          <span>Loading...</span>
+          <span className="loading_span">Loading...</span>
         </div>
       ) : (
         <form
