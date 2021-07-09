@@ -18,12 +18,14 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
     }
   };
 
+  const todayDate = new Date().toISOString().slice(0, 10);
+
   const [editComment] = useMutation(gql`
     mutation EditComment(
       $todo_id: uuid!
       $id: uuid!
       $description: String!
-      $date_updated: date
+      $date_updated: date!
     ) {
       update_comments(
         where: { todo_id: { _eq: $todo_id }, id: { _eq: $id } }
@@ -38,7 +40,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
     }
   `);
 
-  const submitCommentUpdate  = (e) => {
+  const submitCommentUpdate = (e) => {
     if (edtiComment.editDescription !== "") {
       setEditComment((prev) => ({
         ...prev,
@@ -49,6 +51,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
           id: dataComment.id,
           todo_id: todoId,
           description: edtiComment.editDescription,
+          date_updated: todayDate,
         },
       }).then(() => {
         refetch().then(() => {
@@ -96,7 +99,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
       ) : (
         <form
           onDoubleClick={dblclick}
-          onSubmit={submitCommentUpdate }
+          onSubmit={submitCommentUpdate}
           className="formTodoItem"
         >
           <input
