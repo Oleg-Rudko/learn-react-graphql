@@ -19,7 +19,7 @@ const TodoApp = () => {
             assignments: { user_id: { _eq: $user_id } }
             isActive: { _in: $isActive }
           }
-          order_by: { name: asc }
+          order_by: {isActive: asc}
         ) {
           name
           id

@@ -11,7 +11,6 @@ const TodoItem = ({ name, id, refetch }) => {
 
   const dblclick = (e) => {
     if (!todoItemControl.disabledItem) {
-      console.log(e);
       setTodoItemControl((prev) => ({
         ...prev,
         disabledItem: true,
