@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { getFilterTodos, userId } from "../../redux/selectors";
 import Loader from "../Loader";
 import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
+import PermissionViewTodoModal from './permissionTodo/PermissionViewTodoModal';
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
@@ -51,6 +52,7 @@ const TodoApp = () => {
         </div>
         <TodoDisplayButtons dataTodos={data} />
       </div>
+      <PermissionViewTodoModal userId={getUserId} />
     </div>
   );
 };
