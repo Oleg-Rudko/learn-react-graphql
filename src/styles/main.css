@@ -1,6 +1,7 @@
 @import "./authorization.css";
 @import "./todoApp.css";
 @import "./comments.css";
+@import "./permission.css";
 
 :root {
   --main-bg-grey: #333;
