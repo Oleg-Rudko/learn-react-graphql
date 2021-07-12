@@ -3,8 +3,9 @@ import { ButtonGroup, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { changeFilterName } from "./../../../redux/actions";
 
-const TodoDisplayButtons = () => {
+const TodoDisplayButtons = ({ dataTodos }) => {
   const dispatch = useDispatch();
+  const countTodos = dataTodos?.todo.length;
 
   return (
     <div className="todoDisplayButtons">
@@ -15,6 +16,8 @@ const TodoDisplayButtons = () => {
         >
           All todo
         </Button>
+
+        <div className="todoCountDisplay">{countTodos}</div>
         <Button
           variant="success"
           onClick={() => dispatch(changeFilterName("active"))}
