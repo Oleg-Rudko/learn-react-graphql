@@ -29,6 +29,12 @@
   color: #b6b6b6;
 }
 
+.commentCard:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .commentCard,
 .commentsComponent_loader {
   border: 1px solid #fff;
@@ -70,6 +76,8 @@
 .commentCard_date-created {
   color: #888;
   font-style: italic;
+  padding-top: 30px;
+  margin: 0;
 }
 
 .commentsComponent_loader {
