@@ -10,6 +10,7 @@ const TodoDisplayButtons = ({ dataTodos }) => {
   return (
     <div className="todoDisplayButtons">
       <ButtonGroup aria-label="Basic example">
+        <div className="todoCountDisplay">Todos: {countTodos}</div>
         <Button
           variant="warning"
           onClick={() => dispatch(changeFilterName("default"))}
@@ -17,7 +18,6 @@ const TodoDisplayButtons = ({ dataTodos }) => {
           All todo
         </Button>
 
-        <div className="todoCountDisplay">{countTodos}</div>
         <Button
           variant="success"
           onClick={() => dispatch(changeFilterName("active"))}
