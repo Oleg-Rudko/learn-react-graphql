@@ -16,7 +16,7 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
     gql`
       mutation SetAssignment(
         $user_id: Int!
-        $has_many_todo_id: Int!
+        $has_many_todo_id: Int = null
         $isChosen: Boolean
       ) {
         insert_assignments(
@@ -42,6 +42,7 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
       variables: {
         user_id: currentUser.id,
         has_many_todo_id: assignmentsId,
+        // has_many_todo_id: isChecked?.has_many_todo_id === null ? assignmentsId : null,
         isChosen:
           isChecked?.isChosen === undefined ? true : !isChecked.isChosen,
       },
