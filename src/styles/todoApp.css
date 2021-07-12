@@ -1,6 +1,21 @@
 .todoApp {
   background: var(--main-bg-grey);
   min-height: 100vh;
+  position: relative;
+}
+
+.permissionBtn {
+  position: absolute;
+  top: 76px;
+  right: 50px;
+  width: 60px;
+  border: none;
+  background: transparent;
+}
+
+.permissionImg {
+  width: 100%;
+  height: 100%;
 }
 
 .todoApp_wrap {
