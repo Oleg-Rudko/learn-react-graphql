@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { getAssignmentsId } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
+import Loader from "./../../Loader";
 
 const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
+  const [loading, setLoading] = useState(false);
   const isChecked = listAssignments.find(
     (item) => item.user_id === currentUser.id
   );
+
+  const assignmentsId = useSelector(getAssignmentsId);
 
   const [setUserAssignment] = useMutation(
     gql`
@@ -32,8 +36,8 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
     `
   );
 
-  const assignmentsId = useSelector(getAssignmentsId);
   const complete = () => {
+    setLoading(true);
     setUserAssignment({
       variables: {
         user_id: currentUser.id,
@@ -41,17 +45,30 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
         isChosen:
           isChecked?.isChosen === undefined ? true : !isChecked.isChosen,
       },
-    }).then(() => refetch());
+    }).then(() =>
+      refetch().then(() => {
+        setLoading(false);
+      })
+    );
   };
 
   return (
     <div className="permissionUsersList">
       <label className="permissionUsersList_label">
-        <input
-          type="checkbox"
-          onChange={complete}
-          checked={isChecked?.isChosen || false}
-        />
+        {loading ? (
+
+          <div className="permissionUsers_loading">
+            <Loader animation="border" variant="info" size="sm" />
+          </div>
+        ) : (
+          <input
+            className="permissionsUsers_input"
+            type="checkbox"
+            onChange={complete}
+            checked={isChecked?.isChosen || false}
+          />
+        )}
+
         <div>{currentUser.name}</div>
       </label>
     </div>

@@ -14,7 +14,10 @@ const PermissionViewTodoModal = ({ userId }) => {
     gql`
       query GetPermission($user_id: Int!, $assignments_id: Int!) {
         assignments(
-          where: { user_id: { _neq: $user_id }, has_many_todo_id: { _eq: $assignments_id } }
+          where: {
+            user_id: { _neq: $user_id }
+            has_many_todo_id: { _eq: $assignments_id }
+          }
         ) {
           user_id
           id
@@ -38,10 +41,6 @@ const PermissionViewTodoModal = ({ userId }) => {
 
   const arrUsers = data?.users;
   const arrAssignments = data?.assignments;
-  // console.log(data?.assignments, 'assignments');
-  // console.log(data, 'data');
-  // console.log('Test ==== id: 95 / 33');
-  // console.log(arrAssignments);
 
   return (
     <>
