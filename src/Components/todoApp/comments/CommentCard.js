@@ -52,7 +52,7 @@ const CommentCard = ({ dataComment, refetch }) => {
             <img
               className="commentRemove_img"
               src={Close}
-              alt="Remove comment"
+              alt="Remove comment" 
             />
           </button>
         )}
@@ -60,7 +60,7 @@ const CommentCard = ({ dataComment, refetch }) => {
       <p className="commentCard_date-created">
         {dataComment.date_updated === null
           ? `Was created ${dataComment.date_created}`
-          : `(edit) Was updated ${dataComment.date_updated}`}
+          : `Was updated ${dataComment.date_updated}`}
       </p>
     </div>
   );
