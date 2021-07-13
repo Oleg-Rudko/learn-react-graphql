@@ -14,22 +14,20 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
 
   const [setUserAssignment] = useMutation(
     gql`
-      mutation SetAssignment(
-        $user_id: Int!
-        $has_many_todo_id: Int = null
-        $isChosen: Boolean
-      ) {
+      mutation AddAssignments($user_id: Int!, $has_many_todo_id: Int!) {
         insert_assignments(
-          objects: {
-            has_many_todo_id: $has_many_todo_id
-            user_id: $user_id
-            isChosen: $isChosen
-          }
-          on_conflict: {
-            constraint: assignments_user_id_has_many_todo_id_key
-            update_columns: isChosen
-          }
+          objects: { has_many_todo_id: $has_many_todo_id, user_id: $user_id }
         ) {
+          affected_rows
+        }
+      }
+    `
+  );
+
+  const [deleteAssignments] = useMutation(
+    gql`
+      mutation deleteAssignment($id: Int!) {
+        delete_assignments(where: { id: { _eq: $id } }) {
           affected_rows
         }
       }
@@ -38,26 +36,34 @@ const PermissionUsersList = ({ currentUser, listAssignments, refetch }) => {
 
   const complete = () => {
     setLoading(true);
-    setUserAssignment({
-      variables: {
-        user_id: currentUser.id,
-        has_many_todo_id: assignmentsId,
-        // has_many_todo_id: isChecked?.has_many_todo_id === null ? assignmentsId : null,
-        isChosen:
-          isChecked?.isChosen === undefined ? true : !isChecked.isChosen,
-      },
-    }).then(() =>
-      refetch().then(() => {
+    if (isChecked?.isChosen === undefined) {
+      setUserAssignment({
+        variables: {
+          user_id: currentUser.id,
+          has_many_todo_id: assignmentsId,
+        },
+      }).then(() =>
+        refetch().then(() => {
+          setLoading(false);
+        })
+      );
+    }
+
+    if (isChecked?.isChosen) {
+      deleteAssignments({
+        variables: {
+          id: isChecked.id
+        }
+      }).then(() => refetch().then(() => {
         setLoading(false);
-      })
-    );
+      }))
+    }
   };
 
   return (
     <div className="permissionUsersList">
       <label className="permissionUsersList_label">
         {loading ? (
-
           <div className="permissionUsers_loading">
             <Loader animation="border" variant="info" size="sm" />
           </div>
