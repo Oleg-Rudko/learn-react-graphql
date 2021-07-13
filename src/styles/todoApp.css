@@ -161,8 +161,14 @@
   margin-top: 30px;
 }
 
+.todoDisplayButtons_countTodos {
+  display: flex !important;
+  justify-content: space-between;
+}
+
 .todoCountDisplay {
-  width: 30px;
+  font-size: 20px;
+  width: 120px;
   color: #fff;
   display: flex;
   align-items: center;
