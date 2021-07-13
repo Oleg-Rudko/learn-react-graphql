@@ -2,6 +2,11 @@ import React from "react";
 import { ButtonGroup, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { changeFilterName } from "./../../../redux/actions";
+import {
+  ClipboardData,
+  ClipboardPlus,
+  ClipboardCheck,
+} from "react-bootstrap-icons";
 
 const TodoDisplayButtons = ({ dataTodos }) => {
   const dispatch = useDispatch();
@@ -9,27 +14,32 @@ const TodoDisplayButtons = ({ dataTodos }) => {
 
   return (
     <div className="todoDisplayButtons">
-      <ButtonGroup aria-label="Basic example">
-        <div className="todoCountDisplay">Todos: {countTodos}</div>
-        <Button
-          variant="warning"
-          onClick={() => dispatch(changeFilterName("default"))}
-        >
-          All todo
-        </Button>
+      <ButtonGroup
+        aria-label="Basic example"
+        className="todoDisplayButtons_countTodos"
+      >
+        <div className="todoCountDisplay">Todo items {countTodos}</div>
+        <div>
+          <Button
+            variant="light"
+            onClick={() => dispatch(changeFilterName("default"))}
+          >
+            <ClipboardData size="30" />
+          </Button>
 
-        <Button
-          variant="success"
-          onClick={() => dispatch(changeFilterName("active"))}
-        >
-          Active
-        </Button>
-        <Button
-          variant="info"
-          onClick={() => dispatch(changeFilterName("completed"))}
-        >
-          Complete
-        </Button>
+          <Button
+            variant="light"
+            onClick={() => dispatch(changeFilterName("active"))}
+          >
+            <ClipboardPlus size="30" />
+          </Button>
+          <Button
+            variant="light"
+            onClick={() => dispatch(changeFilterName("completed"))}
+          >
+            <ClipboardCheck size="30" />
+          </Button>
+        </div>
       </ButtonGroup>
     </div>
   );

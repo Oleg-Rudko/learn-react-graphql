@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Loader from "./../../Loader";
-import Remove from "../../../img/remove.svg";
+import { Trash } from "react-bootstrap-icons";
 
 const ButtonRemove = ({ refetch, id }) => {
   const [loading, setLoading] = useState(false);
@@ -40,8 +40,12 @@ const ButtonRemove = ({ refetch, id }) => {
           <Loader animation="border" variant="danger" />
         </div>
       ) : (
-        <button className="btnRemove" onClick={() => removeItem(id)} title="Are You sure want to delete it?">
-          <img className="btnRemove_img" src={Remove} alt="Remove todo item" />
+        <button
+          className="btnRemove"
+          onClick={() => removeItem(id)}
+          title="Are You sure want to delete it?"
+        >
+          <Trash size="28" color="#974a4a" />
         </button>
       )}
     </>

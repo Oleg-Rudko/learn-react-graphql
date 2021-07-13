@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Button, Modal } from "react-bootstrap";
-import Permissions from "../../../img/permissions.svg";
+import { PersonPlus } from "react-bootstrap-icons";
 import PermissionUsersList from "./PermissionUsersList";
 import { getAssignmentsId } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
@@ -45,11 +45,7 @@ const PermissionViewTodoModal = ({ userId }) => {
   return (
     <>
       <button onClick={() => setShow(true)} className="permissionBtn">
-        <img
-          className="permissionImg"
-          src={Permissions}
-          alt="Button permissions"
-        />
+        <PersonPlus color="#fff" size="40" />
       </button>
 
       <Modal show={show} onHide={() => setShow(false)}>
