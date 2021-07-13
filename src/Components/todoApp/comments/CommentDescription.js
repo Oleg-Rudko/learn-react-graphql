@@ -3,14 +3,14 @@ import { useMutation, gql } from "@apollo/client";
 import Loader from "../../Loader";
 
 const CommentDescription = ({ dataComment, todoId, refetch }) => {
-  const [edtiComment, setEditComment] = useState({
+  const [editComment, setEditComment] = useState({
     disabledInput: false,
     loading: false,
     editDescription: dataComment.description,
   });
 
   const dblclick = () => {
-    if (!edtiComment.disabledInput) {
+    if (!editComment.disabledInput) {
       setEditComment((prev) => ({
         ...prev,
         disabledInput: true,
@@ -20,8 +20,8 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
 
   const todayDate = new Date().toISOString().slice(0, 10);
 
-  const [editComment] = useMutation(gql`
-    mutation EditComment(
+  const [editingComment] = useMutation(gql`
+    mutation EditimgComment(
       $todo_id: uuid!
       $id: uuid!
       $description: String!
@@ -41,16 +41,16 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
   `);
 
   const submitCommentUpdate = (e) => {
-    if (edtiComment.editDescription !== "") {
+    if (editComment.editDescription !== "") {
       setEditComment((prev) => ({
         ...prev,
         loading: true,
       }));
-      editComment({
+      editingComment({
         variables: {
           id: dataComment.id,
           todo_id: todoId,
-          description: edtiComment.editDescription,
+          description: editComment.editDescription,
           date_updated: todayDate,
         },
       }).then(() => {
@@ -64,7 +64,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
       });
     }
 
-    if (edtiComment.editDescription === "") {
+    if (editComment.editDescription === "") {
       setEditComment((prev) => ({
         ...prev,
         editDescription: dataComment.description,
@@ -91,7 +91,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
 
   return (
     <>
-      {edtiComment.loading ? (
+      {editComment.loading ? (
         <div className="loaderTodoItem">
           <Loader animation="grow" variant="secondary" size="sm" />
           <span className="loading_span">Loading...</span>
@@ -104,11 +104,11 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
         >
           <input
             type="text"
-            className="todoItem"
-            disabled={!edtiComment.disabledInput}
+            className={editComment.disabledInput ? "editableInput" : "todoItem"}
+            disabled={!editComment.disabledInput}
             onChange={onHandleInput}
             onKeyDown={onHandleInput}
-            value={edtiComment.editDescription}
+            value={editComment.editDescription}
           />
         </form>
       )}

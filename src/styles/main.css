@@ -26,3 +26,12 @@
   margin: 0 10px;
   width: 120px;
 }
+
+.editableInput {
+  color: #00eeff8c;
+  background: #404040;
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid #ed696975; 
+  width: 98%;
+}
