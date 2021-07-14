@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { HandThumbsUp, HandThumbsDownFill } from "react-bootstrap-icons";
 
 const CommentsLikes = ({ comments, refetch }) => {
   const likes = comments.likes;
-  const [like, setLike] = useState(comments.likes);
 
   const [changeLikes] = useMutation(
     gql`
@@ -17,25 +16,26 @@ const CommentsLikes = ({ comments, refetch }) => {
   );
 
   const addLike = () => {
-    if (like >= 0) {
-      setLike(like + 1);
+    if (likes >= 0) {
+      changeLikes({
+        variables: {
+          id: comments.id,
+          likes: likes + 1,
+        },
+      }).then(() => refetch());
     }
   };
 
   const dislike = () => {
-    if (like >= 0) {
-      setLike(like - 1);
+    if (likes > 0) {
+      changeLikes({
+        variables: {
+          id: comments.id,
+          likes: likes - 1,
+        },
+      }).then(() => refetch());
     }
   };
-
-  useEffect(() => {
-    changeLikes({
-      variables: {
-        id: comments.id,
-        likes: like,
-      },
-    }).then(() => refetch());
-  }, [like]);
 
   return (
     <div className="commentsLike_wrap">
