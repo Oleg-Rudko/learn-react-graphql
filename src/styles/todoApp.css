@@ -5,10 +5,6 @@
 }
 
 .permissionBtn {
-  position: absolute;
-  top: 76px;
-  right: 50px;
-  width: 60px;
   border: none;
   background: transparent;
 }
@@ -36,6 +32,12 @@
   min-height: 400px;
   border: 1px solid #ffffff2e;
   background: #464646ab;
+}
+
+.settingButtons {
+  position: absolute;
+  top: 77px;
+  right: 10px;
 }
 
 .inputTodo_label {
