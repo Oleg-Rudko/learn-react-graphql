@@ -91,7 +91,9 @@ const TodoItem = ({ name, id, refetch }) => {
         >
           <input
             type="text"
-            className="todoItem"
+            className={
+              todoItemControl.disabledItem ? "editableInput" : "todoItem"
+            }
             disabled={!todoItemControl.disabledItem}
             onChange={onHandleInput}
             onKeyDown={onHandleInput}

@@ -104,7 +104,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
         >
           <input
             type="text"
-            className="todoItem"
+            className={editComment.disabledInput ? "editableInput" : "todoItem"}
             disabled={!editComment.disabledInput}
             onChange={onHandleInput}
             onKeyDown={onHandleInput}
