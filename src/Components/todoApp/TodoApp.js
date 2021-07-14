@@ -8,6 +8,7 @@ import Loader from "../Loader";
 import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
 import PermissionViewTodoModal from "./permissionTodo/PermissionViewTodoModal";
 import Logout from "../authorization/Logout";
+import UserСard from "./UserСard";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
@@ -40,6 +41,7 @@ const TodoApp = () => {
 
   return (
     <div className="todoApp">
+      <UserСard />
       <div className="todoApp_wrap">
         <InputTodo refetch={refetch} />
         <div className="todoApp_displayTodo">

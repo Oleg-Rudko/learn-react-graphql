@@ -4,6 +4,14 @@
   position: relative;
 }
 
+.userCard {
+  color: #fff;
+  position: absolute;
+  top: 20px;
+  left: 163px;
+  font-size: 20px;
+}
+
 .permissionBtn {
   border: none;
   background: transparent;
@@ -17,7 +25,7 @@
 .todoApp_wrap {
   width: var(--main-content-width);
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 95px 0;
 }
 
 .todoApp_loader {
@@ -36,8 +44,8 @@
 
 .settingButtons {
   position: absolute;
-  top: 77px;
-  right: 10px;
+  top: 125px;
+  right: 30px;
 }
 
 .inputTodo_label {

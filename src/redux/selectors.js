@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
 export const userId = (state) => state.user.id;
+export const getAuthorizedUser = (state) => state.user;
 export const spinner = (state) => state.loading;
 export const getFilterName = (state) => state.filterTodos;
 export const getAssignmentsId = (state) => state.user?.assignments?.id;
