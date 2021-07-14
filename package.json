@@ -19,11 +19,13 @@
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-icons": "^1.5.0",
     "react-dom": "^17.0.2",
+    "react-escape-outside": "^0.1.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "surge": "^0.23.0",
     "web-vitals": "^1.0.1",
     "yarn": "^1.22.10"
   },
@@ -31,20 +33,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "rename-index": "node -e \"require('fs').rename('./build/index.html', './build/200.html', (err) => { console.log(err ? err : 'File renamed!') })\"",
+    "predeploy": "yarn build && yarn rename-index",
+    "deploy": "surge --project ./build --domain learn-react-graphql.surge.sh"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

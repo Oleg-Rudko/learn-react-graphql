@@ -29,13 +29,13 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ApolloProvider client={client}>
-        <Router>
+    <Router>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
           <App />
-        </Router>
-      </ApolloProvider>
-    </Provider>
+        </ApolloProvider>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

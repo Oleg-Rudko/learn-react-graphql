@@ -39,7 +39,7 @@
 .commentsComponent_loader {
   border: 1px solid #fff;
   background: #5556;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 15px 10px;
   border-radius: 5px;
 }
@@ -59,6 +59,19 @@
   justify-content: center;
   align-items: center;
   margin: 5px 8px 5px;
+}
+
+.commentsLike_wrap {
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.commentsLike,
+.commentsDislike {
+  background: transparent;
+  border: transparent;
 }
 
 .commentRemove_btn {

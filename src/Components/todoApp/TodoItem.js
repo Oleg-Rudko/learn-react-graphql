@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Loader from "../Loader";
+import EscapeOutside from "react-escape-outside";
 
 const TodoItem = ({ name, id, refetch }) => {
   const [todoItemControl, setTodoItemControl] = useState({
@@ -66,14 +67,14 @@ const TodoItem = ({ name, id, refetch }) => {
       ...prev,
       editName: e.target.value,
     }));
+  };
 
-    if (e.keyCode === 27) {
-      setTodoItemControl((prev) => ({
-        ...prev,
-        editName: name,
-        disabledItem: false,
-      }));
-    }
+  const handleEscapeOutside = () => {
+    setTodoItemControl((prev) => ({
+      ...prev,
+      editName: name,
+      disabledItem: false,
+    }));
   };
 
   return (
@@ -84,22 +85,29 @@ const TodoItem = ({ name, id, refetch }) => {
           <span className="loading_span">Loading...</span>
         </div>
       ) : (
-        <form
-          onDoubleClick={dblclick}
-          onSubmit={submitEditTodoItem}
-          className="formTodoItem"
-        >
-          <input
-            type="text"
-            className={
-              todoItemControl.disabledItem ? "editableInput" : "todoItem"
-            }
-            disabled={!todoItemControl.disabledItem}
-            onChange={onHandleInput}
-            onKeyDown={onHandleInput}
-            value={todoItemControl.editName}
-          />
-        </form>
+        <>
+          {todoItemControl.disabledItem === true ? (
+            <form onSubmit={submitEditTodoItem} className="formTodoItem">
+              <EscapeOutside onEscapeOutside={handleEscapeOutside}>
+                <input
+                  type="text"
+                  className={
+                    todoItemControl.disabledItem ? "editableInput" : "todoItem"
+                  }
+                  disabled={!todoItemControl.disabledItem}
+                  onChange={onHandleInput}
+                  onKeyDown={onHandleInput}
+                  value={todoItemControl.editName}
+                  autoFocus
+                />
+              </EscapeOutside>
+            </form>
+          ) : (
+            <div className="formTodoItem" onDoubleClick={dblclick}>
+              {todoItemControl.editName}
+            </div>
+          )}
+        </>
       )}
     </>
   );

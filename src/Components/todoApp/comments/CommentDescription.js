@@ -20,8 +20,8 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
 
   const todayDate = new Date().toISOString().slice(0, 10);
 
-  const [editingComment] = useMutation(gql`
-    mutation EditimgComment(
+  const [updateComment] = useMutation(gql`
+    mutation EditComment(
       $todo_id: uuid!
       $id: uuid!
       $description: String!
@@ -46,7 +46,7 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
         ...prev,
         loading: true,
       }));
-      editingComment({
+      updateComment({
         variables: {
           id: dataComment.id,
           todo_id: todoId,
