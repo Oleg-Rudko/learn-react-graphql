@@ -8,8 +8,7 @@ const Logout = () => {
   const history = useHistory();
 
   const logout = () => {
-    window.localStorage.removeItem("user_id");
-    window.localStorage.removeItem("isAuth");
+    window.localStorage.clear();
     history.push({ pathname: "/" });
   };
 
