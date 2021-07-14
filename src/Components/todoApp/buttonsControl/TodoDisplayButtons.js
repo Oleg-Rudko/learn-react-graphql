@@ -29,15 +29,15 @@ const TodoDisplayButtons = ({ dataTodos }) => {
           {message} {countTodos > 1 ? "todos" : "todo"} {countTodos}
         </div>
         <div>
-          <Button variant="light" onClick={() => showTodos("default", "All")}>
+          <Button variant="outline-light" onClick={() => showTodos("default", "All")}>
             <ClipboardData size="30" />
           </Button>
 
-          <Button variant="light" onClick={() => showTodos("active", "Active")}>
+          <Button variant="outline-light" onClick={() => showTodos("active", "Active")}>
             <ClipboardPlus size="30" />
           </Button>
           <Button
-            variant="light"
+            variant="outline-light"
             onClick={() => showTodos("completed", "Completed")}
           >
             <ClipboardCheck size="30" />

@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import Loader from "../../Loader";
 import CommentDescription from "./CommentDescription";
 import { XCircle } from "react-bootstrap-icons";
+
 const CommentCard = ({ dataComment, refetch }) => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -47,7 +48,7 @@ const CommentCard = ({ dataComment, refetch }) => {
             <Loader animation="border" variant="danger" size="sm" />
           </div>
         ) : (
-          <button onClick={removeCommentTodo} className="commentRemove_btn">  
+          <button onClick={removeCommentTodo} className="commentRemove_btn">
             <XCircle color="#ae4d4d" />
           </button>
         )}
