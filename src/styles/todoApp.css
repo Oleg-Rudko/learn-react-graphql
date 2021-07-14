@@ -6,13 +6,18 @@
 
 .permissionBtn {
   position: absolute;
-  top: 76px;
+  top: 78px;
   right: 50px;
   width: 60px;
   border: none;
   background: transparent;
 }
 
+.logoutBtn {
+  position: absolute;
+  top: 78px;
+  right: 120px;
+}
 .permissionImg {
   width: 100%;
   height: 100%;
