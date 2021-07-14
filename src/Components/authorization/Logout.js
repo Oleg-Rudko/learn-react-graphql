@@ -26,14 +26,14 @@ const Logout = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Action</Modal.Title>
+          <Modal.Title>Verification</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you really want to leave?</Modal.Body>
+        <Modal.Body>Do you want to exit?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
+          <Button variant="success" onClick={() => setShow(false)}>
             No
           </Button>
-          <Button onClick={logout} variant="primary">
+          <Button onClick={logout} variant="secondary">
             Yes
           </Button>
         </Modal.Footer>
