@@ -7,6 +7,7 @@ import Loader from "../../Loader";
 import CommentCard from "./CommentCard";
 import { spinner } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
+import CommentsLikes from './CommentsLikes';
 
 const Comments = () => {
   const { id } = useParams();
@@ -33,6 +34,7 @@ const Comments = () => {
             {comments.map((item) => (
               <div key={item.id}>
                 <CommentCard dataComment={item} refetch={refetch} />
+                <CommentsLikes comments={item} refetch={refetch} />
               </div>
             ))}
 
