@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Loader from "../../Loader";
+import EscapeOutside from "react-escape-outside";
 
 const CommentDescription = ({ dataComment, todoId, refetch }) => {
   const [editComment, setEditComment] = useState({
@@ -79,14 +80,14 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
       ...prev,
       editDescription: e.target.value,
     }));
+  };
 
-    if (e.keyCode === 27) {
-      setEditComment((prev) => ({
-        ...prev,
-        editDescription: dataComment.description,
-        disabledInput: false,
-      }));
-    }
+  const handleEscapeOutside = () => {
+    setEditComment((prev) => ({
+      ...prev,
+      editDescription: dataComment.description,
+      disabledInput: false,
+    }));
   };
 
   return (
@@ -97,20 +98,28 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
           <span className="loading_span">Loading...</span>
         </div>
       ) : (
-        <form
-          onDoubleClick={dblclick}
-          onSubmit={submitCommentUpdate}
-          className="formTodoItem"
-        >
-          <input
-            type="text"
-            className={editComment.disabledInput ? "editableInput" : "todoItem"}
-            disabled={!editComment.disabledInput}
-            onChange={onHandleInput}
-            onKeyDown={onHandleInput}
-            value={editComment.editDescription}
-          />
-        </form>
+        <>
+          {editComment.disabledInput === true ? (
+            <form onSubmit={submitCommentUpdate} className="formTodoItem">
+              <EscapeOutside onEscapeOutside={handleEscapeOutside}>
+                <input
+                  type="text"
+                  className={
+                    editComment.disabledInput ? "editableInput" : "todoItem"
+                  }
+                  onChange={onHandleInput}
+                  onKeyDown={onHandleInput}
+                  value={editComment.editDescription}
+                  autoFocus
+                />
+              </EscapeOutside>
+            </form>
+          ) : (
+            <div className="formTodoItem" onDoubleClick={dblclick}>
+              {editComment.editDescription}
+            </div>
+          )}
+        </>
       )}
     </>
   );
