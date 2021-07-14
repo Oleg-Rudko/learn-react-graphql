@@ -21,3 +21,8 @@
   background: var(--main-bg-grey);
   height: 100vh;
 }
+
+.logoutBtn {
+  background: transparent;
+  border: transparent;
+}

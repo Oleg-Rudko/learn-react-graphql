@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { getFilterTodos, userId } from "../../redux/selectors";
 import Loader from "../Loader";
 import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
-import PermissionViewTodoModal from './permissionTodo/PermissionViewTodoModal';
+import PermissionViewTodoModal from "./permissionTodo/PermissionViewTodoModal";
 import Logout from "../authorization/Logout";
 
 const TodoApp = () => {
@@ -21,7 +21,7 @@ const TodoApp = () => {
             assignments: { user_id: { _eq: $user_id } }
             isActive: { _in: $isActive }
           }
-          order_by: {isActive: asc}
+          order_by: { isActive: asc }
         ) {
           name
           id
@@ -53,8 +53,10 @@ const TodoApp = () => {
         </div>
         <TodoDisplayButtons dataTodos={data} />
       </div>
-      <PermissionViewTodoModal userId={getUserId} />
-      <Logout />
+      <div className="settingButtons">
+        <PermissionViewTodoModal userId={getUserId} />
+        <Logout />
+      </div>
     </div>
   );
 };
