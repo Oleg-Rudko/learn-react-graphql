@@ -4,7 +4,7 @@ import { gql } from "../../../hooks/useQueryGraphql";
 export const useSubscriptionsComments = (options) => {
   const result = useSubscription(
     gql`
-      query GetTodoName($id: uuid!) {
+      subscription GetTodoName($id: uuid!) {
         todo(where: { id: { _eq: $id } }) {
           name
           comments {
