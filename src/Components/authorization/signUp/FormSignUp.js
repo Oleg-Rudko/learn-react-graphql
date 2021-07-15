@@ -16,7 +16,7 @@ const FormSignUp = () => {
     email: "",
     password: "",
     passwordVerification: "",
-    age: null,
+    age: undefined,
     city: "",
     displayMessagePassword: false,
   });
