@@ -1,12 +1,13 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import Loader from "../Loader";
 import ButtonShowComments from "./buttonsControl/ButtonShowComments";
+import { useSubscription } from "@apollo/react-hooks";
 
 const CommentsCount = ({ todoId }) => {
-  const { data, loading } = useQuery(
+  const { data, loading } = useSubscription(
     gql`
-      query CountComment($todo_id: uuid!) {
+      subscription CountComment($todo_id: uuid!) {
         comments(where: { todo_id: { _eq: $todo_id } }) {
           id
         }
@@ -29,7 +30,10 @@ const CommentsCount = ({ todoId }) => {
         </div>
       ) : (
         <>
-          <div className={`commentsCount ${countComment && "showComments_is"}`} title="Left comments">
+          <div
+            className={`commentsCount ${countComment && "showComments_is"}`}
+            title="Left comments"
+          >
             {countComment}
           </div>
         </>
