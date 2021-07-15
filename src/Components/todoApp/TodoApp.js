@@ -1,7 +1,7 @@
 import React from "react";
 import DisplayTodos from "./DisplayTodos";
 import InputTodo from "./InputTodo";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { getFilterTodos, userId } from "../../redux/selectors";
 import Loader from "../Loader";

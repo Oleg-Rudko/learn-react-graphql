@@ -27,9 +27,7 @@ const ButtonRemove = ({ refetch, id }) => {
         todo_id: id,
       },
     }).then(() => {
-      refetch().then(() => {
-        setLoading(false);
-      });
+      setLoading(false);
     });
   };
 

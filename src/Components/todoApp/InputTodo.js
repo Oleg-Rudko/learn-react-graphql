@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { spinner, getAssignmentsId } from "../../redux/selectors";
+import { setLoading } from "../../redux/actions";
 
 const InputTodo = () => {
   const [todo, setTodo] = useState({
@@ -10,6 +11,7 @@ const InputTodo = () => {
   });
 
   const assignmentsId = useSelector(getAssignmentsId);
+  const dispatch = useDispatch();
   const loading = useSelector(spinner);
 
   const [addTodo] = useMutation(
@@ -23,12 +25,13 @@ const InputTodo = () => {
   );
 
   const handleSubmit = (event) => {
+    dispatch(setLoading(true));
     addTodo({
       variables: {
         name: todo.todoTask,
         assignments_id: assignmentsId,
       },
-    });
+    }).then(() => dispatch(setLoading(false)));
 
     setTodo({ todoTask: "" });
     event.preventDefault();
