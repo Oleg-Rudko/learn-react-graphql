@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { spinner, getAssignmentsId } from "../../redux/selectors";
-import { setLoading } from "../../redux/actions";
 
-const InputTodo = ({ refetch }) => {
+const InputTodo = () => {
   const [todo, setTodo] = useState({
     todoTask: "",
   });
 
   const assignmentsId = useSelector(getAssignmentsId);
-  const dispatch = useDispatch();
   const loading = useSelector(spinner);
 
   const [addTodo] = useMutation(
@@ -25,17 +23,12 @@ const InputTodo = ({ refetch }) => {
   );
 
   const handleSubmit = (event) => {
-    dispatch(setLoading(true));
     addTodo({
       variables: {
         name: todo.todoTask,
         assignments_id: assignmentsId,
       },
-    }).then(() =>
-      refetch().then(() => {
-        dispatch(setLoading(false));
-      })
-    );
+    });
 
     setTodo({ todoTask: "" });
     event.preventDefault();

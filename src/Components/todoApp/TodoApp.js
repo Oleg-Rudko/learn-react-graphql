@@ -9,14 +9,15 @@ import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
 import PermissionViewTodoModal from "./permissionTodo/PermissionViewTodoModal";
 import Logout from "../authorization/Logout";
 import UserСard from "./UserСard";
+import { useSubscription } from "@apollo/react-hooks";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
   const getFilterName = useSelector(getFilterTodos);
 
-  const { data, refetch, loading } = useQuery(
+  const { data, refetch, loading } = useSubscription(
     gql`
-      query MyTodos($user_id: Int!, $isActive: [Boolean!]) {
+      subscription MyTodos($user_id: Int!, $isActive: [Boolean!]) {
         todo(
           where: {
             assignments: { user_id: { _eq: $user_id } }
