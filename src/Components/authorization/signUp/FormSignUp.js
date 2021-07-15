@@ -16,7 +16,7 @@ const FormSignUp = () => {
     email: "",
     password: "",
     passwordVerification: "",
-    age: "",
+    age: null,
     city: "",
     displayMessagePassword: false,
   });
@@ -37,8 +37,8 @@ const FormSignUp = () => {
   const [addUser] = useMutation(
     gql`
       mutation AddUser(
-        $city: String!
-        $age: Int!
+        $city: String
+        $age: Int
         $email: String!
         $name: String!
         $password: String!
