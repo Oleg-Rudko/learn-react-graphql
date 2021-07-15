@@ -15,8 +15,10 @@ const FormSignUp = () => {
     name: "",
     email: "",
     password: "",
+    passwordVerification: "",
     age: "",
     city: "",
+    displayMessagePassword: false,
   });
 
   const [addAssignments] = useMutation(
@@ -86,19 +88,29 @@ const FormSignUp = () => {
   );
 
   const handleSubmit = (event) => {
-    dispatch(setLoading(true));
-    addUser({
-      variables: {
-        name: form.name,
-        password: form.password,
-        email: form.email,
-        city: form.city,
-        age: form.age,
-      },
-    }).then(() => {
-      dispatch(setLoading(false));
-    });
-    setForm({ name: "", email: "", password: "", age: "", city: "" });
+    if (form.password === form.passwordVerification) {
+      dispatch(setLoading(true));
+      addUser({
+        variables: {
+          name: form.name,
+          password: form.password,
+          passwordVerification: "",
+          email: form.email,
+          city: form.city,
+          age: form.age,
+        },
+      }).then(() => {
+        dispatch(setLoading(false));
+      });
+      setForm({ name: "", email: "", password: "", age: "", city: "" });
+    } else if (form.password !== form.passwordVerification) {
+      setForm((prev) => ({
+        ...prev,
+        password: "",
+        passwordVerification: "",
+        displayMessagePassword: true,
+      }));
+    }
     event.preventDefault();
   };
 
@@ -106,6 +118,7 @@ const FormSignUp = () => {
     setForm((prev) => ({
       ...prev,
       [name]: value,
+      displayMessagePassword: false,
     }));
   };
 
@@ -119,19 +132,19 @@ const FormSignUp = () => {
         <div>
           <Form onSubmit={handleSubmit} className="formSignUp">
             <Form.Group>
-              <Form.Label className="formSignUp_lable">Your name</Form.Label>
+              <Form.Label className="formSignUp_label">Your name</Form.Label>
               <Form.Control
                 placeholder="Your name"
                 onChange={onHandleInput}
                 name="name"
                 value={form.name}
-                tyep="text"
+                type="text"
                 required
               />
             </Form.Group>
 
             <Form.Group>
-              <Form.Label className="formSignUp_lable">
+              <Form.Label className="formSignUp_label">
                 Email address
               </Form.Label>
               <Form.Control
@@ -145,7 +158,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label className="formSignUp_lable">Password</Form.Label>
+              <Form.Label className="formSignUp_label">Password</Form.Label>
               <Form.Control
                 placeholder="Password"
                 onChange={onHandleInput}
@@ -155,9 +168,32 @@ const FormSignUp = () => {
                 required
               />
             </Form.Group>
+            <div
+              className={
+                form.displayMessagePassword
+                  ? "errorMessage_password show "
+                  : "errorMessage_password hidden"
+              }
+            >
+              Password does not match
+            </div>
 
             <Form.Group>
-              <Form.Label className="formSignUp_lable">Age</Form.Label>
+              <Form.Label className="formSignUp_label">
+                Repeat password
+              </Form.Label>
+              <Form.Control
+                placeholder="Password"
+                onChange={onHandleInput}
+                name="passwordVerification"
+                value={form.passwordVerification}
+                type="password"
+                required
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label className="formSignUp_label">Age</Form.Label>
               <Form.Control
                 placeholder="Enter your age"
                 onChange={onHandleInput}
@@ -168,7 +204,7 @@ const FormSignUp = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label className="formSignUp_lable">City</Form.Label>
+              <Form.Label className="formSignUp_label">City</Form.Label>
               <Form.Control
                 placeholder="Enter your City"
                 onChange={onHandleInput}

@@ -12,7 +12,7 @@
 }
 
 .formLogin_label,
-.formSignUp_lable {
+.formSignUp_label {
   color: #fff;
 }
 
@@ -25,4 +25,24 @@
 .logoutBtn {
   background: transparent;
   border: transparent;
+}
+
+.errorMessage_password {
+  border-bottom: 1px solid #d1b0b0;
+  color: #f57c7c;
+  transform: translateY(-20px);
+}
+
+.hidden {
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.show {
+  height: 30px;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform 1000ms ease-out;
+  opacity: 1;
 }
