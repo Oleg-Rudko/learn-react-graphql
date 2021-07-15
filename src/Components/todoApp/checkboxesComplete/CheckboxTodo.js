@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import Loader from "../../Loader";
 
-const CompletedTodo = ({ id, refetch, isActive }) => {
+const CompletedTodo = ({ id, isActive }) => {
   const [onComplete, setOnComplete] = useState(false);
 
   const [completeItemTodo] = useMutation(gql`
@@ -24,11 +24,7 @@ const CompletedTodo = ({ id, refetch, isActive }) => {
         id,
         isActive: e.target.checked,
       },
-    }).then(() =>
-      refetch().then(() => {
-        setOnComplete(false);
-      })
-    );
+    }).then(() => setOnComplete(false));
   };
 
   return (

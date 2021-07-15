@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { spinner, getAssignmentsId } from "../../redux/selectors";
 import { setLoading } from "../../redux/actions";
 
-const InputTodo = ({ refetch }) => {
+const InputTodo = () => {
   const [todo, setTodo] = useState({
     todoTask: "",
   });
@@ -31,11 +31,7 @@ const InputTodo = ({ refetch }) => {
         name: todo.todoTask,
         assignments_id: assignmentsId,
       },
-    }).then(() =>
-      refetch().then(() => {
-        dispatch(setLoading(false));
-      })
-    );
+    }).then(() => dispatch(setLoading(false)));
 
     setTodo({ todoTask: "" });
     event.preventDefault();

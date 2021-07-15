@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import Loader from "../Loader";
 import EscapeOutside from "react-escape-outside";
 
-const TodoItem = ({ name, id, refetch }) => {
+const TodoItem = ({ name, id }) => {
   const [todoItemControl, setTodoItemControl] = useState({
     disabledItem: false,
     loading: false,
@@ -42,13 +42,11 @@ const TodoItem = ({ name, id, refetch }) => {
           name: todoItemControl.editName,
         },
       }).then(() => {
-        refetch().then(() => {
-          setTodoItemControl((prev) => ({
-            ...prev,
-            disabledItem: false,
-            loading: false,
-          }));
-        });
+        setTodoItemControl((prev) => ({
+          ...prev,
+          disabledItem: false,
+          loading: false,
+        }));
       });
     }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import DisplayTodos from "./DisplayTodos";
 import InputTodo from "./InputTodo";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { getFilterTodos, userId } from "../../redux/selectors";
 import Loader from "../Loader";
@@ -9,14 +9,15 @@ import TodoDisplayButtons from "./buttonsControl/TodoDisplayButtons";
 import PermissionViewTodoModal from "./permissionTodo/PermissionViewTodoModal";
 import Logout from "../authorization/Logout";
 import UserСard from "./UserСard";
+import { useSubscription } from "@apollo/react-hooks";
 
 const TodoApp = () => {
   const getUserId = useSelector(userId);
   const getFilterName = useSelector(getFilterTodos);
 
-  const { data, refetch, loading } = useQuery(
+  const { data, loading } = useSubscription(
     gql`
-      query MyTodos($user_id: Int!, $isActive: [Boolean!]) {
+      subscription MyTodos($user_id: Int!, $isActive: [Boolean!]) {
         todo(
           where: {
             assignments: { user_id: { _eq: $user_id } }
@@ -43,14 +44,14 @@ const TodoApp = () => {
     <div className="todoApp">
       <UserСard />
       <div className="todoApp_wrap">
-        <InputTodo refetch={refetch} />
+        <InputTodo />
         <div className="todoApp_displayTodo">
           {loading ? (
             <div className="todoApp_loader">
               <Loader animation="border" variant="success" />
             </div>
           ) : (
-            <DisplayTodos data={data} refetch={refetch} />
+            <DisplayTodos data={data} />
           )}
         </div>
         <TodoDisplayButtons dataTodos={data} />

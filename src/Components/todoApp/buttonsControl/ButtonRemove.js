@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import Loader from "./../../Loader";
 import { Trash } from "react-bootstrap-icons";
 
-const ButtonRemove = ({ refetch, id }) => {
+const ButtonRemove = ({ id }) => {
   const [loading, setLoading] = useState(false);
 
   const [removeItemFromHasura] = useMutation(
@@ -27,9 +27,7 @@ const ButtonRemove = ({ refetch, id }) => {
         todo_id: id,
       },
     }).then(() => {
-      refetch().then(() => {
-        setLoading(false);
-      });
+      setLoading(false);
     });
   };
 

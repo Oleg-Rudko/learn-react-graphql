@@ -4,7 +4,7 @@ import { useMutation, gql } from "@apollo/client";
 import { setLoading } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 
-const AddComment = ({ todoId, refetch }) => {
+const AddComment = ({ todoId }) => {
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
 
@@ -27,11 +27,7 @@ const AddComment = ({ todoId, refetch }) => {
         todo_id: todoId,
         description: comment,
       },
-    }).then(() =>
-      refetch().then(() => {
-        dispatch(setLoading(false));
-      })
-    );
+    }).then(() => dispatch(setLoading(false)));
     setComment("");
     event.preventDefault();
   };
