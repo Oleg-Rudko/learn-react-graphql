@@ -6,6 +6,7 @@ import { setUserCredential, setLoading } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { spinner } from "../../../redux/selectors";
 import Loader from "../../Loader";
+import BtnBackMainPage from "./../../BtnBackMainPage";
 
 const FormSignUp = () => {
   const history = useHistory();
@@ -213,9 +214,12 @@ const FormSignUp = () => {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Sign Up
-            </Button>
+            <div className="signUp_btn">
+              <BtnBackMainPage variant="outline-success" />
+              <Button variant="primary" type="submit">
+                Sign Up
+              </Button>
+            </div>
           </Form>
         </div>
       )}

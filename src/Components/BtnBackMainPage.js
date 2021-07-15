@@ -3,14 +3,14 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ArrowReturnLeft } from "react-bootstrap-icons";
 
-const BtnReturnsBackToTodoList = () => {
+const BtnBackMainPage = ({ variant }) => {
   return (
     <Link to="/">
-      <Button variant="outline-info">
+      <Button variant={variant}>
         <ArrowReturnLeft />
       </Button>
     </Link>
   );
 };
 
-export default BtnReturnsBackToTodoList;
+export default BtnBackMainPage;

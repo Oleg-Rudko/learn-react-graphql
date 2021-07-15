@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserCredential } from "../../../redux/actions";
 import Loader from "../../Loader";
+import BtnBackMainPage from "../../BtnBackMainPage";
 
 const FormLogin = () => {
   const history = useHistory();
@@ -93,9 +94,12 @@ const FormLogin = () => {
                 onChange={onHandleInput}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Login
-            </Button>
+            <div className="signUp_btn">
+              <BtnBackMainPage variant="outline-success" />
+              <Button variant="primary" type="submit">
+                Login
+              </Button>
+            </div>
           </Form>
         </>
       )}
