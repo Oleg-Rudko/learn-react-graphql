@@ -15,7 +15,7 @@ const TodoApp = () => {
   const getUserId = useSelector(userId);
   const getFilterName = useSelector(getFilterTodos);
 
-  const { data, refetch, loading } = useSubscription(
+  const { data, loading } = useSubscription(
     gql`
       subscription MyTodos($user_id: Int!, $isActive: [Boolean!]) {
         todo(
@@ -44,14 +44,14 @@ const TodoApp = () => {
     <div className="todoApp">
       <UserСard />
       <div className="todoApp_wrap">
-        <InputTodo refetch={refetch} />
+        <InputTodo />
         <div className="todoApp_displayTodo">
           {loading ? (
             <div className="todoApp_loader">
               <Loader animation="border" variant="success" />
             </div>
           ) : (
-            <DisplayTodos data={data} refetch={refetch} />
+            <DisplayTodos data={data} />
           )}
         </div>
         <TodoDisplayButtons dataTodos={data} />

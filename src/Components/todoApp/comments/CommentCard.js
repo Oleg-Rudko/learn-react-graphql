@@ -5,7 +5,7 @@ import Loader from "../../Loader";
 import CommentDescription from "./CommentDescription";
 import { XCircle } from "react-bootstrap-icons";
 
-const CommentCard = ({ dataComment, refetch }) => {
+const CommentCard = ({ dataComment }) => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [removeComment] = useMutation(
@@ -27,21 +27,13 @@ const CommentCard = ({ dataComment, refetch }) => {
         id: dataComment.id,
         todo_id: id,
       },
-    }).then(() =>
-      refetch().then(() => {
-        setLoading(false);
-      })
-    );
+    }).then(() => setLoading(false));
   };
 
   return (
     <div className="commentCard">
       <div className="commentCard_description">
-        <CommentDescription
-          dataComment={dataComment}
-          todoId={id}
-          refetch={refetch}
-        />
+        <CommentDescription dataComment={dataComment} todoId={id} />
 
         {loading ? (
           <div className="commentCard_description-loader">

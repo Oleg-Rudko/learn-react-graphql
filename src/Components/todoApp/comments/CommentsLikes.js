@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, gql } from "@apollo/react-hooks";
 import { HandThumbsUp, HandThumbsDownFill } from "react-bootstrap-icons";
 
-const CommentsLikes = ({ comments, refetch }) => {
+const CommentsLikes = ({ comments }) => {
   const likes = comments.likes;
 
   const [changeLikes] = useMutation(
@@ -22,7 +22,7 @@ const CommentsLikes = ({ comments, refetch }) => {
           id: comments.id,
           likes: likes + 1,
         },
-      }).then(() => refetch());
+      });
     }
   };
 
@@ -33,7 +33,7 @@ const CommentsLikes = ({ comments, refetch }) => {
           id: comments.id,
           likes: likes - 1,
         },
-      }).then(() => refetch());
+      });
     }
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useQueryTodo } from "./useQueries";
+import { useSubscriptionsComments } from "./useQueries";
 import AddComment from "./AddComment";
 import BtnReturnsBackToTodoList from "./BtnReturnsBackToTodoList";
 import Loader from "../../Loader";
@@ -12,7 +12,7 @@ import CommentsLikes from "./CommentsLikes";
 const Comments = () => {
   const { id } = useParams();
   const loader = useSelector(spinner);
-  const { todoName, comments, refetch, loading } = useQueryTodo({
+  const { todoName, comments, loading } = useSubscriptionsComments({
     variables: { id: id },
   });
 
@@ -33,8 +33,8 @@ const Comments = () => {
 
             {comments.map((item) => (
               <div key={item.id}>
-                <CommentCard dataComment={item} refetch={refetch} />
-                <CommentsLikes comments={item} refetch={refetch} />
+                <CommentCard dataComment={item} />
+                <CommentsLikes comments={item} />
               </div>
             ))}
 
@@ -44,7 +44,7 @@ const Comments = () => {
               </div>
             )}
 
-            <AddComment todoId={id} refetch={refetch} />
+            <AddComment todoId={id} />
             <BtnReturnsBackToTodoList />
           </>
         )}

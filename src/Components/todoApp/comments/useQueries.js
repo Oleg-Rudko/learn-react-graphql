@@ -1,7 +1,8 @@
-import { useQueryGraphql, gql } from "../../../hooks/useQueryGraphql";
+import { useSubscription } from "@apollo/react-hooks";
+import { gql } from "../../../hooks/useQueryGraphql";
 
-export const useQueryTodo = (options) => {
-  const result = useQueryGraphql(
+export const useSubscriptionsComments = (options) => {
+  const result = useSubscription(
     gql`
       query GetTodoName($id: uuid!) {
         todo(where: { id: { _eq: $id } }) {
@@ -21,7 +22,6 @@ export const useQueryTodo = (options) => {
 
   return {
     loading: result.loading,
-    refetch: result.refetch,
     todoName: result?.data?.todo[0].name || "",
     comments: result?.data?.todo[0].comments || [],
   };

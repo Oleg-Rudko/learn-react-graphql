@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import Loader from "../../Loader";
 import EscapeOutside from "react-escape-outside";
 
-const CommentDescription = ({ dataComment, todoId, refetch }) => {
+const CommentDescription = ({ dataComment, todoId }) => {
   const [editComment, setEditComment] = useState({
     disabledInput: false,
     loading: false,
@@ -55,13 +55,11 @@ const CommentDescription = ({ dataComment, todoId, refetch }) => {
           date_updated: todayDate,
         },
       }).then(() => {
-        refetch().then(() => {
-          setEditComment((prev) => ({
-            ...prev,
-            disabledInput: false,
-            loading: false,
-          }));
-        });
+        setEditComment((prev) => ({
+          ...prev,
+          disabledInput: false,
+          loading: false,
+        }));
       });
     }
 
