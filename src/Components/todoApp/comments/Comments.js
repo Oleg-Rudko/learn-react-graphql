@@ -2,12 +2,12 @@ import React from "react";
 import { useParams } from "react-router";
 import { useSubscriptionsComments } from "./useQueries";
 import AddComment from "./AddComment";
-import BtnReturnsBackToTodoList from "./BtnReturnsBackToTodoList";
 import Loader from "../../Loader";
 import CommentCard from "./CommentCard";
 import { spinner } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
 import CommentsLikes from "./CommentsLikes";
+import BtnBackMainPage from "../../BtnBackMainPage";
 
 const Comments = () => {
   const { id } = useParams();
@@ -45,7 +45,7 @@ const Comments = () => {
             )}
 
             <AddComment todoId={id} />
-            <BtnReturnsBackToTodoList />
+            <BtnBackMainPage variant="outline-info" />
           </>
         )}
       </div>
