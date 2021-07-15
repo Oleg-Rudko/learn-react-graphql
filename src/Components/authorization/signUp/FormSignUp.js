@@ -94,7 +94,6 @@ const FormSignUp = () => {
         variables: {
           name: form.name,
           password: form.password,
-          passwordVerification: "",
           email: form.email,
           city: form.city,
           age: form.age,
