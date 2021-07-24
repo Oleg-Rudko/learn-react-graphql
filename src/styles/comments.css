@@ -74,6 +74,17 @@
   border: transparent;
 }
 
+.commentsLike_loader {
+  padding-left: 1px;
+}
+
+.countLikes {
+  width: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .commentRemove_btn {
   border: none;
   background: transparent;
