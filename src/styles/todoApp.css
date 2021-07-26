@@ -4,12 +4,105 @@
   position: relative;
 }
 
+.todoApp_wrap {
+  width: var(--main-content-width);
+  margin: 0 auto;
+  padding: 95px 0;
+}
+
 .userCard {
   color: #fff;
   position: absolute;
   top: 20px;
   left: 163px;
   font-size: 20px;
+}
+
+.userCard_btn {
+  background: transparent;
+  border: transparent;
+  margin-right: 15px;
+}
+
+.editPersonalData {
+  background: var(--main-bg-grey);
+  min-height: 100vh;
+}
+
+.editPersonalData_warp {
+  width: var(--main-content-width);
+  margin: 0 auto;
+  padding: 95px 0;
+}
+
+.editPersonalData_loader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 332px;
+  border: 1px solid #fff;
+  margin-bottom: 30px;
+}
+
+.editPersonalData_wrapper {
+  width: 100%;
+}
+
+.editPersonalData_blockInput {
+  display: flex;
+  width: 90% !important;
+  margin: 15px auto !important;
+}
+
+.editPersonalData_title {
+  width: 170px;
+  font-size: 20px;
+  color: #ffffff45;
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+
+.editBtn {
+  background: transparent;
+  border: transparent;
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.editBtn:hover {
+  border: 1px solid #fff;
+}
+
+.editPersonalData_input-edit {
+  color: #8ac09b !important;
+  background: #404040 !important;
+  padding: 0 15px !important;
+  border: 1px solid #161227 !important;
+  width: 100% !important;
+}
+
+.editPersonalData_input-disabled {
+  background: var(--main-bg-grey) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0) !important;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 19px;
+}
+
+.escapeOutside_input-width {
+  width: 100%;
+}
+
+.editPersonalData_buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .permissionBtn {
@@ -20,12 +113,6 @@
 .permissionImg {
   width: 100%;
   height: 100%;
-}
-
-.todoApp_wrap {
-  width: var(--main-content-width);
-  margin: 0 auto;
-  padding: 95px 0;
 }
 
 .todoApp_loader {
