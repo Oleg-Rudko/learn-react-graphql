@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { userId } from "../../redux/selectors";
 import { Pencil } from "react-bootstrap-icons";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import EscapeOutside from "react-escape-outside";
 import BtnBackMainPage from "./../BtnBackMainPage";
@@ -87,16 +87,22 @@ const EditPersonalData = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    updateUserData({
-      variables: {
-        id: currentUserId,
-        name: dataUser.yourName,
-        city: dataUser.yourCity,
-        age: dataUser.yourAge,
-        password: dataUser.yourPassword,
-      },
-    }).then(() => refetch());
+  const handleSubmit = (disabledTitle, bool, e) => {
+    if (e.keyCode === 13) {
+      setDisabled((prev) => ({
+        ...prev,
+        [disabledTitle]: bool,
+      }));
+      updateUserData({
+        variables: {
+          id: currentUserId,
+          name: dataUser.yourName,
+          city: dataUser.yourCity,
+          age: dataUser.yourAge,
+          password: dataUser.yourPassword,
+        },
+      }).then(() => refetch());
+    }
   };
 
   const handleEscapeOutside = (titleEscapeOutside, boolean) => {
@@ -137,6 +143,7 @@ const EditPersonalData = () => {
                       type="text"
                       value={dataUser.yourName}
                       onChange={onHandleInput}
+                      onKeyDown={(e) => handleSubmit("disabledName", true, e)}
                       autoFocus
                     />
                   </EscapeOutside>
@@ -173,6 +180,7 @@ const EditPersonalData = () => {
                       type="number"
                       value={dataUser.yourAge}
                       onChange={onHandleInput}
+                      onKeyDown={(e) => handleSubmit("disabledAge", true, e)}
                       autoFocus
                     />
                   </EscapeOutside>
@@ -209,6 +217,7 @@ const EditPersonalData = () => {
                       type="text"
                       value={dataUser.yourCity}
                       onChange={onHandleInput}
+                      onKeyDown={(e) => handleSubmit("disabledCity", true, e)}
                       autoFocus
                     />
                   </EscapeOutside>
@@ -245,6 +254,9 @@ const EditPersonalData = () => {
                       type="password"
                       value={dataUser.yourPassword}
                       onChange={onHandleInput}
+                      onKeyDown={(e) =>
+                        handleSubmit("disabledPassword", true, e)
+                      }
                       autoFocus
                     />
                   </EscapeOutside>
@@ -263,12 +275,7 @@ const EditPersonalData = () => {
           )}
         </div>
 
-        <div className="editPersonalData_buttons">
-          <BtnBackMainPage variant="outline-success" />
-          <Button onClick={handleSubmit} variant="outline-info">
-            Save changes
-          </Button>
-        </div>
+        <BtnBackMainPage variant="outline-success" />
       </div>
     </div>
   );
