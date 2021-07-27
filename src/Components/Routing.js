@@ -5,6 +5,7 @@ import Login from "./authorization/login/Login";
 import Auth from "./authorization/Auth";
 import Comments from "./todoApp/comments/Comments";
 import EditPersonalData from "./todoApp/EditPersonalData";
+import TodoApp from "./todoApp/TodoApp";
 
 const Routing = () => {
   return (
@@ -13,6 +14,7 @@ const Routing = () => {
         <Route exact path="/" component={Auth} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/todo-app" component={TodoApp} />
         <Route path="/comments/:id" component={Comments} />
         <Route path="/edit-personal-data" component={EditPersonalData} />
       </Switch>

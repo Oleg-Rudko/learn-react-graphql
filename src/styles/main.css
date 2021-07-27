@@ -16,7 +16,8 @@
   justify-content: center;
 }
 
-.mainPage {
+.mainPage,
+.appsPage {
   background: var(--main-bg-grey);
   height: 100vh;
 }
@@ -25,6 +26,27 @@
 .mainPage_sing-up {
   margin: 0 10px;
   width: 120px;
+}
+
+.appsPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.appsPage_title {
+  color: #fff;
+  font-size: 30px;
+}
+
+.appsPage_links {
+  margin-top: 15px;
+}
+
+.link_todoApp,
+.link_ticToe {
+  margin: 0 15px;
 }
 
 .editableInput {

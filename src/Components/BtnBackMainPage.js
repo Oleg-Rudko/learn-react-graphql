@@ -5,7 +5,7 @@ import { ArrowReturnLeft } from "react-bootstrap-icons";
 
 const BtnBackMainPage = ({ variant }) => {
   return (
-    <Link to="/">
+    <Link to="/todo-app">
       <Button variant={variant}>
         <ArrowReturnLeft />
       </Button>

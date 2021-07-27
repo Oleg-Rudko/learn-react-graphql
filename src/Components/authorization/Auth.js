@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MainPage from "../MainPage";
-import TodoApp from "./../todoApp/TodoApp";
+import AppsPage from "../AppsPage";
 import { useQuery, gql } from "@apollo/client";
 import { setUserCredential } from "../../redux/actions";
 import { useDispatch } from "react-redux";
@@ -47,7 +47,7 @@ const Auth = () => {
 
   return (
     <>
-      {JSON.parse(localStorage.getItem("isAuth")) ? <TodoApp /> : <MainPage />}
+      {JSON.parse(localStorage.getItem("isAuth")) ? <AppsPage /> : <MainPage />}
     </>
   );
 };
