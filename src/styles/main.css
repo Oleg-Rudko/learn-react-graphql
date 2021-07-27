@@ -2,6 +2,7 @@
 @import "./todoApp.css";
 @import "./comments.css";
 @import "./permission.css";
+@import "./ticToe.css";
 
 :root {
   --main-bg-grey: #333;
