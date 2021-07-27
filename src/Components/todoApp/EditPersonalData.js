@@ -16,7 +16,6 @@ const EditPersonalData = () => {
         users(where: { id: { _eq: $id } }) {
           password
           city
-          email
           name
           age
         }
@@ -37,19 +36,12 @@ const EditPersonalData = () => {
         $id: Int!
         $age: Int!
         $city: String!
-        $email: String!
         $name: String!
         $password: String!
       ) {
         update_users(
           where: { id: { _eq: $id } }
-          _set: {
-            age: $age
-            city: $city
-            email: $email
-            name: $name
-            password: $password
-          }
+          _set: { age: $age, city: $city, name: $name, password: $password }
         ) {
           affected_rows
         }
@@ -60,7 +52,6 @@ const EditPersonalData = () => {
   useEffect(() => {
     setDataUser(() => ({
       yourName: userData?.name,
-      yourEmail: userData?.email,
       yourAge: userData?.age,
       yourCity: userData?.city,
       yourPassword: userData?.password,
@@ -69,7 +60,6 @@ const EditPersonalData = () => {
 
   const [dataUser, setDataUser] = useState({
     yourName: "",
-    yourEmail: "",
     yearAge: "",
     yourCity: "",
     yourPassword: "",
@@ -77,7 +67,6 @@ const EditPersonalData = () => {
 
   const [disabled, setDisabled] = useState({
     disabledName: true,
-    disabledEmail: true,
     disabledAge: true,
     disabledCity: true,
     disabledPassword: true,
@@ -106,7 +95,6 @@ const EditPersonalData = () => {
         city: dataUser.yourCity,
         age: dataUser.yourAge,
         password: dataUser.yourPassword,
-        email: dataUser.yourEmail,
       },
     }).then(() => refetch());
   };
@@ -157,42 +145,6 @@ const EditPersonalData = () => {
                 <button
                   onClick={() =>
                     handleClick("disabledName", !disabled.disabledName)
-                  }
-                  className="editBtn"
-                >
-                  <Pencil size="30" color="#fff" />
-                </button>
-              </div>
-
-              <div className="editPersonalData_blockInput">
-                <p className="editPersonalData_title">Your email is:</p>
-                {disabled.disabledEmail === true ? (
-                  <div className="editPersonalData_input-disabled">
-                    {userData?.email}
-                  </div>
-                ) : (
-                  <EscapeOutside
-                    onEscapeOutside={() =>
-                      handleEscapeOutside("disabledEmail", true)
-                    }
-                    className="escapeOutside_input-width"
-                  >
-                    <Form.Control
-                      name="yourEmail"
-                      placeholder={userData?.email}
-                      className="editPersonalData_input-edit"
-                      size="lg"
-                      type="email"
-                      value={dataUser.yourEmail}
-                      onChange={onHandleInput}
-                      autoFocus
-                    />
-                  </EscapeOutside>
-                )}
-
-                <button
-                  onClick={() =>
-                    handleClick("disabledEmail", !disabled.disabledEmail)
                   }
                   className="editBtn"
                 >
