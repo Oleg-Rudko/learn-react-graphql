@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 const ItemOfListGame = ({ getGame, getRoom }) => {
   const game = getGame?.game;
   const room = getRoom?.room;
-  // console.log(room, "room");
+  console.log(game, "game");
+  console.log(room, "room");
 
   return (
     <div className="listOfGame">

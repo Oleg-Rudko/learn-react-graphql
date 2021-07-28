@@ -1,8 +1,8 @@
 import React from "react";
 import { gql } from "@apollo/client";
+import { useSubscription } from "@apollo/react-hooks";
 import HeaderOfListTicToe from "./header/HeaderOfListTicToe";
 import BodyOfListTicToe from "./body/BodyOfListTicToe";
-import { useSubscription } from "@apollo/react-hooks";
 
 const ListOfGames = () => {
   const { data } = useSubscription(
@@ -10,6 +10,7 @@ const ListOfGames = () => {
       subscription GetListOfRooms {
         room {
           room_id
+          game_id
         }
       }
     `,
@@ -17,8 +18,6 @@ const ListOfGames = () => {
       fetchPolicy: "network-only",
     }
   );
-  // const gameRoom = data?.room;
-  // console.log(data, "game room");
 
   return (
     <div className="listOfGames">

@@ -19,7 +19,6 @@ const BodyOfListTicToe = ({ getRooms }) => {
     }
   );
   const getGames = data?.game;
-  // console.log(getGames, "list of games");
 
   return (
     <div>
