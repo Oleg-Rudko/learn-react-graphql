@@ -1,10 +1,26 @@
 import React from "react";
+import { useSubscription } from "@apollo/react-hooks";
+import { gql } from "@apollo/client";
 import Loader from "../../Loader";
 import ItemOfListGame from "./ItemOfListGame";
 
-const BodyOfListTicToe = ({ data, loading }) => {
+const BodyOfListTicToe = ({ getRooms }) => {
+  const { data, loading } = useSubscription(
+    gql`
+      subscription GetListOfGames {
+        game {
+          name
+          id
+        }
+      }
+    `,
+    {
+      fetchPolicy: "network-only",
+    }
+  );
   const getGames = data?.game;
-  // console.log(data, "get game body");
+  // console.log(getGames, "list of games");
+
   return (
     <div>
       {getGames?.length === 0 ? (
@@ -16,7 +32,7 @@ const BodyOfListTicToe = ({ data, loading }) => {
               <Loader animation="border" variant="secondary" />
             </div>
           ) : (
-            <ItemOfListGame getGame={data} />
+            <ItemOfListGame getGame={data} getRoom={getRooms} />
           )}
         </>
       )}

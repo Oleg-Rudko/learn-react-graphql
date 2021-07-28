@@ -1,37 +1,30 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
-import { useSelector } from "react-redux";
-import { userId } from "../../redux/selectors";
+import { gql } from "@apollo/client";
 import HeaderOfListTicToe from "./header/HeaderOfListTicToe";
 import BodyOfListTicToe from "./body/BodyOfListTicToe";
+import { useSubscription } from "@apollo/react-hooks";
 
 const ListOfGames = () => {
-  const currentUserId = useSelector(userId);
-
-  const { data, refetch, loading } = useQuery(
+  const { data } = useSubscription(
     gql`
-      query GetListOfGames($id: Int!) {
-        game(where: { created_by_user_id: { _eq: $id } }) {
-          name
-          id
+      subscription GetListOfRooms {
+        room {
+          room_id
         }
       }
     `,
     {
-      variables: {
-        id: currentUserId,
-      },
       fetchPolicy: "network-only",
     }
   );
-
-  // console.log(data, "list of tic toe");
+  // const gameRoom = data?.room;
+  // console.log(data, "game room");
 
   return (
     <div className="listOfGames">
       <div className="listOfGames_wrap">
-        <HeaderOfListTicToe refetch={refetch} />
-        <BodyOfListTicToe data={data} loading={loading} />
+        <HeaderOfListTicToe />
+        <BodyOfListTicToe getRooms={data} />
       </div>
     </div>
   );

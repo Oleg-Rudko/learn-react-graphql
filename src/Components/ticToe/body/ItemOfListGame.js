@@ -2,9 +2,10 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const ItemOfListGame = ({ getGame }) => {
+const ItemOfListGame = ({ getGame, getRoom }) => {
   const game = getGame?.game;
-  // console.log(game, "getGame");
+  const room = getRoom?.room;
+  // console.log(room, "room");
 
   return (
     <div className="listOfGame">
