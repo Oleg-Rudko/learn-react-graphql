@@ -5,12 +5,15 @@ import HeaderOfListTicToe from "./header/HeaderOfListTicToe";
 import BodyOfListTicToe from "./body/BodyOfListTicToe";
 
 const ListOfGames = () => {
-  const { data } = useSubscription(
+  const { data, loading } = useSubscription(
     gql`
-      subscription GetListOfRooms {
-        room {
-          room_id
-          game_id
+      subscription GetListOfGames {
+        game {
+          name
+          id
+          room {
+            id
+          }
         }
       }
     `,
@@ -23,7 +26,7 @@ const ListOfGames = () => {
     <div className="listOfGames">
       <div className="listOfGames_wrap">
         <HeaderOfListTicToe />
-        <BodyOfListTicToe getRooms={data} />
+        <BodyOfListTicToe gamesAndRooms={data} loading={loading} />
       </div>
     </div>
   );

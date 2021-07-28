@@ -53,15 +53,15 @@ const CreateGame = () => {
         insert_room(objects: { game_id: $game_id }) {
           affected_rows
           returning {
-            room_id
+            id
           }
         }
       }
     `,
     {
       onCompleted: (data) => {
-        const creatingRoom = data.insert_room.returning[0].room_id;
-        history.push({ pathname: `/game-room/${creatingRoom}` });
+        const creatingRoomId = data.insert_room.returning[0].id;
+        history.push({ pathname: `/game-room/${creatingRoomId}` });
       },
     }
   );
