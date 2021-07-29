@@ -3,9 +3,10 @@ import Loader from "../../Loader";
 import ItemOfListGame from "./ItemOfListGame";
 
 const BodyOfListTicToe = ({ gamesAndRooms, loading }) => {
+  const arrGame = gamesAndRooms?.game;
   return (
     <div>
-      {gamesAndRooms?.length === 0 ? (
+      {gamesAndRooms?.game.length === 0 ? (
         <p className="listOfGames_warning">There are no games now</p>
       ) : (
         <>
@@ -14,7 +15,13 @@ const BodyOfListTicToe = ({ gamesAndRooms, loading }) => {
               <Loader animation="border" variant="secondary" />
             </div>
           ) : (
-            <ItemOfListGame gamesAndRooms={gamesAndRooms} />
+            <div className="listOfGame">
+              {arrGame?.map(({ id, name, room }) => (
+                <div key={id} className="listOfGame_item">
+                  <ItemOfListGame name={name} room={room} />
+                </div>
+              ))}
+            </div>
           )}
         </>
       )}

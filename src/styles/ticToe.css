@@ -9,6 +9,20 @@
   margin: 0 auto;
 }
 
+.warning {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.warningTrue {
+  background: red;
+}
+
+.warningFalse {
+  background: green;
+}
+
 .headerTicToe {
   display: flex;
   justify-content: space-between;
