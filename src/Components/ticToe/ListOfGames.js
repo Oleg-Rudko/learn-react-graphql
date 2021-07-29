@@ -13,6 +13,8 @@ const ListOfGames = () => {
           id
           room {
             id
+            owner_game
+            joined_game
           }
         }
       }

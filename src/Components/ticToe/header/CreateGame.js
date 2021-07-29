@@ -42,6 +42,7 @@ const CreateGame = () => {
       createRoom({
         variables: {
           game_id: gameId,
+          owner_game: currentUserId,
         },
       });
     }
@@ -49,8 +50,8 @@ const CreateGame = () => {
 
   const [createRoom] = useMutation(
     gql`
-      mutation CreateNewGame($game_id: Int!) {
-        insert_room(objects: { game_id: $game_id }) {
+      mutation CreateNewGame($game_id: Int!, $owner_game: Int!) {
+        insert_room(objects: { game_id: $game_id, owner_game: $owner_game }) {
           affected_rows
           returning {
             id
