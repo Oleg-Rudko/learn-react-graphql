@@ -4,6 +4,7 @@ import ItemOfListGame from "./ItemOfListGame";
 
 const BodyOfListTicToe = ({ gamesAndRooms, loading }) => {
   const arrGame = gamesAndRooms?.game;
+
   return (
     <div>
       {gamesAndRooms?.game.length === 0 ? (

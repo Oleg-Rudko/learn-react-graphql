@@ -6,11 +6,14 @@ import { userId } from "../../../redux/selectors";
 import { useHistory } from "react-router";
 import Loader from "../../Loader";
 
-const CreateGame = () => {
+const CreateGame = ({ data, dataUser }) => {
   const [titleGame, setTitleGame] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const currentUserId = useSelector(userId);
+  const currentUserName = dataUser?.users.find(
+    (item) => currentUserId === item.id
+  );
   const history = useHistory();
 
   const onHandleInput = (e) => {
@@ -43,6 +46,7 @@ const CreateGame = () => {
         variables: {
           game_id: gameId,
           owner_game: currentUserId,
+          owner_game_name: currentUserName.name,
         },
       });
     }
@@ -50,8 +54,18 @@ const CreateGame = () => {
 
   const [createRoom] = useMutation(
     gql`
-      mutation CreateNewGame($game_id: Int!, $owner_game: Int!) {
-        insert_room(objects: { game_id: $game_id, owner_game: $owner_game }) {
+      mutation CreateNewGame(
+        $game_id: Int!
+        $owner_game: Int!
+        $owner_game_name: String!
+      ) {
+        insert_room(
+          objects: {
+            game_id: $game_id
+            owner_game: $owner_game
+            owner_game_name: $owner_game_name
+          }
+        ) {
           affected_rows
           returning {
             id
