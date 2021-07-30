@@ -19,6 +19,8 @@ const ListOfGames = () => {
             id
             owner_game
             joined_game
+            owner_game_name
+            joined_game_name
           }
         }
       }
@@ -26,6 +28,17 @@ const ListOfGames = () => {
     {
       fetchPolicy: "network-only",
     }
+  );
+
+  const { data: dataUser } = useSubscription(
+    gql`
+      subscription GetListOfGames {
+        users {
+          name
+          id
+        }
+      }
+    `
   );
 
   return (
@@ -36,7 +49,7 @@ const ListOfGames = () => {
         } warning`}
       ></div>
       <div className="listOfGames_wrap">
-        <HeaderOfListTicToe />
+        <HeaderOfListTicToe data={data} dataUser={dataUser} />
         <BodyOfListTicToe gamesAndRooms={data} loading={loading} />
       </div>
     </div>

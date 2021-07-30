@@ -1,9 +1,11 @@
-.listOfGames {
+.listOfGames,
+.gameRoom {
   background: var(--main-bg-grey);
   height: 100vh;
 }
 
-.listOfGames_wrap {
+.listOfGames_wrap,
+.gameRoom_wrap {
   width: var(--main-content-width);
   padding-top: 30px;
   margin: 0 auto;
@@ -69,4 +71,32 @@
 
 .itemGame {
   width: 15%;
+}
+
+.itemGame_btn {
+  margin-right: 15px;
+}
+
+.itemGame_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.itemGame_vs {
+  margin: 0;
+  color: #ca4a4a;
+  font-size: 18px;
+}
+
+.gamerCount_full {
+  color: #ff0707;
+}
+
+.gamerCount_part {
+  color: #176304;
+  font-weight: bold;
+}
+
+.gameRoom {
 }

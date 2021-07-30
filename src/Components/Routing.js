@@ -18,7 +18,7 @@ const Routing = () => {
         <Route path="/login" component={Login} />
         <Route path="/todo-app" component={TodoApp} />
         <Route path="/list-of-games" component={ListOfGames} />
-        <Route path="/game-room" component={GameRoom} />
+        <Route path="/game-room/:id" component={GameRoom} />
         <Route path="/comments/:id" component={Comments} />
         <Route path="/edit-personal-data" component={EditPersonalData} />
       </Switch>
