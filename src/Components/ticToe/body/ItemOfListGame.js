@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSubscription } from "@apollo/react-hooks";
 import { useMutation, gql } from "@apollo/client";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 const ItemOfListGame = ({ name, room }) => {
-  const [gamerCount, setGamerCount] = useState(0);
   const currentUserId = JSON.parse(localStorage.getItem("user_id"));
   const history = useHistory();
 
-  const { data } = useSubscription(
+  const { data: getUserName } = useSubscription(
     gql`
       subscription GetListOfGames($id: Int) {
         users(where: { id: { _eq: $id } }) {
@@ -23,7 +22,18 @@ const ItemOfListGame = ({ name, room }) => {
       },
     }
   );
-  const currentUserName = data?.users[0].name;
+  const currentUserName = getUserName?.users[0].name;
+
+  const { data } = useSubscription(
+    gql`
+      subscription {
+        room {
+          joined_game
+          owner_game
+        }
+      }
+    `
+  );
 
   const [updateJoinToGame] = useMutation(
     gql`
@@ -45,15 +55,6 @@ const ItemOfListGame = ({ name, room }) => {
     `
   );
 
-  const countGamersInRoom = () => {
-    if (room[0]?.owner_game && gamerCount < 1) {
-      setGamerCount(1);
-    }
-    if (room[0]?.joined_game && gamerCount < 2) {
-      setGamerCount(2);
-    }
-  };
-
   const joinToGame = (id) => {
     if (currentUserId !== ownerGameId) {
       updateJoinToGame({
@@ -67,10 +68,7 @@ const ItemOfListGame = ({ name, room }) => {
     }
   };
 
-  if (gamerCount < 2) {
-    countGamersInRoom();
-  }
-
+  const gamerCount = data?.room[0];
   const roomId = room[0]?.id;
   const ownerGameId = room[0]?.owner_game;
   const nameOwnerGame = room[0]?.owner_game_name;
@@ -84,7 +82,9 @@ const ItemOfListGame = ({ name, room }) => {
 
         <p className="itemGame_vs">vs</p>
 
-        {nameJoinedGame !== `""` ? nameJoinedGame : null}
+        {nameJoinedGame === `""` || nameJoinedGame === ""
+          ? null
+          : nameJoinedGame}
       </div>
 
       <div>
@@ -96,9 +96,11 @@ const ItemOfListGame = ({ name, room }) => {
           join
         </Button>
         <span
-          className={gamerCount === 2 ? "gamerCount_full" : "gamerCount_part"}
+          className={
+            gamerCount?.joined_game ? "gamerCount_full" : "gamerCount_part"
+          }
         >
-          {gamerCount}/2
+          {gamerCount?.joined_game ? "2" : "1"}/2
         </span>
       </div>
     </>
