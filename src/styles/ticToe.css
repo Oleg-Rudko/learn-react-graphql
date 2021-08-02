@@ -98,5 +98,30 @@
   font-weight: bold;
 }
 
-.gameRoom {
+.gameRoom_wrap {
+  display: flex;
+  width: 95%;
 }
+
+.playingField {
+  width: 60%;
+  border: 1px solid #fff;
+  height: 500px;
+}
+
+.gameNavigation {
+  width: 40%;
+  border: 1px solid #fff;
+  height: 500px;
+  margin-left: 30px;
+}
+
+.gameNavigation_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* .gameNavigation_body {
+} */

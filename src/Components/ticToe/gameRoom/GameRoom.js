@@ -1,11 +1,13 @@
 import React from "react";
-import CloseGame from "./CloseGame";
+import GameNavigation from "./gameNavigation/GameNavigation";
+import PlayingField from "./playingField/PlayingField";
 
 const GameRoom = () => {
   return (
     <div className="gameRoom">
       <div className="gameRoom_wrap">
-        <CloseGame />
+        <PlayingField />
+        <GameNavigation />
       </div>
     </div>
   );
