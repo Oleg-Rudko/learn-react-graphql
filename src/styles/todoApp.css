@@ -100,11 +100,6 @@
   width: 100%;
 }
 
-.editPersonalData_buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
 .permissionBtn {
   border: none;
   background: transparent;
