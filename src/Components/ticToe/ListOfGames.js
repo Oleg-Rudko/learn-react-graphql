@@ -45,7 +45,7 @@ const ListOfGames = () => {
     <div className="listOfGames">
       <div
         className={`${
-          currentUser.name === undefined ? "warningTrue" : "warningFalse"
+          currentUser.name === undefined ? "userIsNotReady" : "userIsReady"
         } warning`}
       ></div>
       <div className="listOfGames_wrap">

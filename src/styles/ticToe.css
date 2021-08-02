@@ -17,12 +17,14 @@
   border-radius: 50%;
 }
 
-.warningTrue {
+.userIsNotReady {
   background: red;
+  font-weight: bold;
 }
 
-.warningFalse {
+.userIsReady {
   background: green;
+  font-weight: bold;
 }
 
 .headerTicToe {
@@ -123,5 +125,56 @@
   height: 100%;
 }
 
-/* .gameNavigation_body {
-} */
+.gameNavigation_wrapper {
+  width: 90%;
+  margin: 15px auto;
+}
+
+.gameNavigation_header {
+  color: #fff;
+}
+
+.playersList {
+  color: #fff;
+  list-style: none;
+  padding: 0;
+}
+
+.playersList_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.playersList_item-readyInfo {
+  display: flex;
+  align-items: center;
+}
+
+.playersList_loader {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.playersList_loader-wrap {
+  display: none;
+}
+
+.playerList_warning {
+  margin-right: 10px;
+}
+
+.playersList_name {
+  line-height: 0;
+}
+
+.gameNavigation_footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+  width: 100%;
+}
