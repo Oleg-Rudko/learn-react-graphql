@@ -13,9 +13,11 @@ const AppsPage = () => {
           </Button>
         </Link>
 
-        <Button className="link_ticToe" variant="outline-info">
-          Tic Toe
-        </Button>
+        <Link to="/list-of-games">
+          <Button className="link_ticToe" variant="outline-info">
+            Tic Toe
+          </Button>
+        </Link>
       </div>
     </div>
   );

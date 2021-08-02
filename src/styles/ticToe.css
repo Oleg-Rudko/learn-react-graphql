@@ -1,0 +1,102 @@
+.listOfGames,
+.gameRoom {
+  background: var(--main-bg-grey);
+  height: 100vh;
+}
+
+.listOfGames_wrap,
+.gameRoom_wrap {
+  width: var(--main-content-width);
+  padding-top: 30px;
+  margin: 0 auto;
+}
+
+.warning {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.warningTrue {
+  background: red;
+}
+
+.warningFalse {
+  background: green;
+}
+
+.headerTicToe {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 20px 15px;
+}
+
+.listOfGames_warning {
+  color: #f3dc5c;
+  font-size: 33px;
+  background: rgb(45 43 43);
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 20px;
+  height: 100px;
+}
+
+.listOfGame_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listOfGame {
+  margin-top: 40px;
+}
+
+.listOfGame_item {
+  color: #fff;
+  margin-bottom: 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+
+.bodyOfList_loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.itemGame {
+  width: 15%;
+}
+
+.itemGame_btn {
+  margin-right: 15px;
+}
+
+.itemGame_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.itemGame_vs {
+  margin: 0;
+  color: #ca4a4a;
+  font-size: 18px;
+}
+
+.gamerCount_full {
+  color: #ff0707;
+}
+
+.gamerCount_part {
+  color: #176304;
+  font-weight: bold;
+}
+
+.gameRoom {
+}
