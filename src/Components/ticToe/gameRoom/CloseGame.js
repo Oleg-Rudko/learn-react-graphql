@@ -99,11 +99,11 @@ const CloseGame = () => {
   const joinedGameId = data?.room[0].joined_game;
 
   return (
-    <div>
+    <div className="closeGame">
       {joinedGameId === currentUserId && (
         <Button
           onClick={() => closeGame(leaveRoomMessage, "leave")}
-          variant="outline-success"
+          variant="warning"
         >
           Leave this game
         </Button>
