@@ -59,7 +59,7 @@ const PlayerList = ({ dataUsers }) => {
   };
 
   // Develop button before deploy button will be deleted
-  const rest = () => {
+  const reset = () => {
     updateUserReadyPlay({
       variables: {
         id: id,
@@ -119,7 +119,7 @@ const PlayerList = ({ dataUsers }) => {
         </Button>
       </li>
       {/* Develop button before deploy button will be deleted */}
-      <button onClick={rest}>rest</button>
+      <button onClick={reset}>Reset</button>
     </ul>
   );
 };

@@ -3,12 +3,14 @@ import { useSubscription } from "@apollo/react-hooks";
 import { gql } from "@apollo/client";
 import GameNavigation from "./gameNavigation/GameNavigation";
 import PlayingField from "./playingField/PlayingField";
+import { useParams } from "react-router";
 
 const GameRoom = () => {
+  const { id } = useParams();
   const { data } = useSubscription(
     gql`
-      subscription GetPlayersData {
-        room {
+      subscription GetPlayersData($id: Int!) {
+        room(where: { id: { _eq: $id } }) {
           id
           owner_game
           joined_game
@@ -18,7 +20,12 @@ const GameRoom = () => {
           joined_game_ready
         }
       }
-    `
+    `,
+    {
+      variables: {
+        id: id,
+      },
+    }
   );
 
   const dataUsers = data?.room[0];
