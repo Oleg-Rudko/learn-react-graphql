@@ -24,17 +24,6 @@ const ItemOfListGame = ({ name, room }) => {
   );
   const currentUserName = getUserName?.users[0].name;
 
-  const { data } = useSubscription(
-    gql`
-      subscription {
-        room {
-          joined_game
-          owner_game
-        }
-      }
-    `
-  );
-
   const [updateJoinToGame] = useMutation(
     gql`
       mutation JoinToGame(
@@ -64,11 +53,10 @@ const ItemOfListGame = ({ name, room }) => {
           joined_game_name: currentUserName,
         },
       });
-      history.push({ pathname: `/game-room/${roomId}` });
+      history.push({ pathname: `/game-room/${id}` });
     }
   };
 
-  const gamerCount = data?.room[0];
   const roomId = room[0]?.id;
   const ownerGameId = room[0]?.owner_game;
   const nameOwnerGame = room[0]?.owner_game_name;
@@ -92,15 +80,16 @@ const ItemOfListGame = ({ name, room }) => {
           onClick={() => joinToGame(roomId)}
           variant="outline-info"
           className="itemGame_btn"
+          disabled={room[0]?.joined_game ? true : false}
         >
           join
         </Button>
         <span
           className={
-            gamerCount?.joined_game ? "gamerCount_full" : "gamerCount_part"
+            room[0]?.joined_game ? "gamerCount_full" : "gamerCount_part"
           }
         >
-          {gamerCount?.joined_game ? "2" : "1"}/2
+          {room[0]?.joined_game ? "2" : "1"}/2
         </span>
       </div>
     </>
