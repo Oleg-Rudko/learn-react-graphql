@@ -14,6 +14,7 @@ const PlayerList = ({ dataUsers }) => {
   const joinedName = dataUsers?.joined_game_name;
   const joinedId = dataUsers?.joined_game;
   const joinedGameReady = dataUsers?.joined_game_ready;
+  const loaderForWaiting = [1, 2, 3, 4];
   const { id } = useParams();
 
   const [updateUserReadyPlay] = useMutation(
@@ -74,9 +75,13 @@ const PlayerList = ({ dataUsers }) => {
       <li className="playersList_item">
         <div className="playersList_item-readyInfo">
           <div className="playersList_loader">
-            <div className={ownerGameReady ? "playersList_loader-wrap" : null}>
-              <Loader animation="border" variant="info" size="sm" />
-            </div>
+            {joinedId ? (
+              <div
+                className={ownerGameReady ? "playersList_loader-wrap" : null}
+              >
+                <Loader animation="border" variant="info" size="sm" />
+              </div>
+            ) : null}
           </div>
           <div
             className={`${
@@ -95,29 +100,39 @@ const PlayerList = ({ dataUsers }) => {
         </Button>
       </li>
 
-      <li className="playersList_item">
-        <div className="playersList_item-readyInfo">
-          <div className="playersList_loader">
-            <div className={joinedGameReady ? "playersList_loader-wrap" : null}>
-              <Loader animation="border" variant="info" size="sm" />
-            </div>
-          </div>
-          <div
-            className={`${
-              joinedGameReady ? "userIsReady" : "userIsNotReady"
-            } warning playerList_warning`}
-          ></div>
-          <span className="playersList_name">{joinedName}</span>
+      {!joinedId ? (
+        <div className="playersList_item playersList_item-waiting">
+          {loaderForWaiting.map(() => (
+            <Loader animation="grow" variant="info" size="sm" />
+          ))}
         </div>
-        <Button
-          disabled={currentUserId === joinedId ? false : true}
-          variant="success"
-          size="sm"
-          onClick={() => ready("joined")}
-        >
-          Ready
-        </Button>
-      </li>
+      ) : (
+        <li className="playersList_item">
+          <div className="playersList_item-readyInfo">
+            <div className="playersList_loader">
+              <div
+                className={joinedGameReady ? "playersList_loader-wrap" : null}
+              >
+                <Loader animation="border" variant="info" size="sm" />
+              </div>
+            </div>
+            <div
+              className={`${
+                joinedGameReady ? "userIsReady" : "userIsNotReady"
+              } warning playerList_warning`}
+            ></div>
+            <span className="playersList_name">{joinedName}</span>
+          </div>
+          <Button
+            disabled={currentUserId === joinedId ? false : true}
+            variant="success"
+            size="sm"
+            onClick={() => ready("joined")}
+          >
+            Ready
+          </Button>
+        </li>
+      )}
       {/* Develop button before deploy button will be deleted */}
       <button onClick={reset}>Reset</button>
     </ul>

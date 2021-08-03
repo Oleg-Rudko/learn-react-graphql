@@ -145,6 +145,12 @@
   align-items: center;
   justify-content: space-between;
   margin: 15px 0;
+  height: 32px;
+}
+
+.playersList_item-waiting {
+  justify-content: start;
+  padding-left: 25px;
 }
 
 .playersList_item-readyInfo {
