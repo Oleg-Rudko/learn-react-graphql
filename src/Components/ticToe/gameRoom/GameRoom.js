@@ -18,6 +18,7 @@ const GameRoom = () => {
           joined_game_name
           owner_game_ready
           joined_game_ready
+          move_game
         }
       }
     `,
