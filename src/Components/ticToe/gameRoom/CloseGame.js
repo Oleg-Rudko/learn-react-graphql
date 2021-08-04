@@ -51,6 +51,7 @@ const CloseGame = () => {
         $joined_game: Int
         $joined_game_name: String!
         $joined_game_ready: Boolean
+        $move_game: Int
       ) {
         update_room(
           where: { id: { _eq: $id } }
@@ -58,6 +59,7 @@ const CloseGame = () => {
             joined_game: $joined_game
             joined_game_name: $joined_game_name
             joined_game_ready: $joined_game_ready
+            move_game: $move_game
           }
         ) {
           affected_rows
@@ -86,6 +88,7 @@ const CloseGame = () => {
           joined_game: null,
           joined_game_name: "",
           joined_game_ready: false,
+          move_game: null,
         },
       });
       history.push({ pathname: "/list-of-games" });

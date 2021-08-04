@@ -7,6 +7,7 @@ import { useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 const PlayerList = ({ dataUsers }) => {
+  // console.log(dataUsers);
   const currentUserId = useSelector(userId);
   const ownerName = dataUsers?.owner_game_name;
   const ownerId = dataUsers?.owner_game;
@@ -23,12 +24,14 @@ const PlayerList = ({ dataUsers }) => {
         $id: Int!
         $owner_game_ready: Boolean
         $joined_game_ready: Boolean
+        $move_game: Int
       ) {
         update_room(
           where: { id: { _eq: $id } }
           _set: {
             owner_game_ready: $owner_game_ready
             joined_game_ready: $joined_game_ready
+            move_game: $move_game
           }
         ) {
           affected_rows
@@ -58,6 +61,24 @@ const PlayerList = ({ dataUsers }) => {
       });
     }
   };
+
+  const moveGame = () => {
+    const arrUsersReady = [ownerId, joinedId];
+    const randomElement =
+      arrUsersReady[Math.floor(Math.random() * arrUsersReady.length)];
+    updateUserReadyPlay({
+      variables: {
+        id: id,
+        owner_game_ready: ownerGameReady,
+        joined_game_ready: joinedGameReady,
+        move_game: randomElement,
+      },
+    });
+  };
+
+  if (dataUsers?.joined_game_ready && dataUsers.owner_game_ready) {
+    moveGame();
+  }
 
   // Develop button before deploy button will be deleted
   const reset = () => {
