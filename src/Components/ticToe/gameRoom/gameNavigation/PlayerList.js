@@ -123,8 +123,10 @@ const PlayerList = ({ dataUsers }) => {
 
       {!joinedId ? (
         <div className="playersList_item playersList_item-waiting">
-          {loaderForWaiting.map(() => (
-            <Loader animation="grow" variant="info" size="sm" />
+          {loaderForWaiting.map((_, idx) => (
+            <div key={idx}>
+              <Loader animation="grow" variant="info" size="sm" />
+            </div>
           ))}
         </div>
       ) : (

@@ -6,7 +6,7 @@ import { userId } from "../../../redux/selectors";
 import { useHistory } from "react-router";
 import Loader from "../../Loader";
 
-const CreateGame = ({ data, dataUser }) => {
+const CreateGame = ({ dataUser }) => {
   const [titleGame, setTitleGame] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -15,10 +15,6 @@ const CreateGame = ({ data, dataUser }) => {
     (item) => currentUserId === item.id
   );
   const history = useHistory();
-
-  const onHandleInput = (e) => {
-    setTitleGame(e.target.value);
-  };
 
   const [createGame] = useMutation(
     gql`
@@ -40,21 +36,19 @@ const CreateGame = ({ data, dataUser }) => {
     }
   );
 
-  const createNewRoom = (gameId) => {
-    if (gameId) {
-      createRoom({
-        variables: {
-          game_id: gameId,
-          owner_game: currentUserId,
-          owner_game_name: currentUserName.name,
-        },
-      });
-    }
-  };
+  const [createTicToe] = useMutation(
+    gql`
+      mutation CreateNewTicToe($room_id: Int!) {
+        insert_tic_toe(objects: { room_id: $room_id }) {
+          affected_rows
+        }
+      }
+    `
+  );
 
   const [createRoom] = useMutation(
     gql`
-      mutation CreateNewGame(
+      mutation CreateRoom(
         $game_id: Int!
         $owner_game: Int!
         $owner_game_name: String!
@@ -75,11 +69,16 @@ const CreateGame = ({ data, dataUser }) => {
     `,
     {
       onCompleted: (data) => {
-        const creatingRoomId = data.insert_room.returning[0].id;
+        const creatingRoomId = data?.insert_room.returning[0].id;
         history.push({ pathname: `/game-room/${creatingRoomId}` });
+        createNewTicToe(creatingRoomId);
       },
     }
   );
+
+  const onHandleInput = (e) => {
+    setTitleGame(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
@@ -93,6 +92,28 @@ const CreateGame = ({ data, dataUser }) => {
         setTitleGame("");
         setShow(false);
         setLoading(false);
+      });
+    }
+  };
+
+  const createNewRoom = (gameId) => {
+    if (gameId) {
+      createRoom({
+        variables: {
+          game_id: gameId,
+          owner_game: currentUserId,
+          owner_game_name: currentUserName.name,
+        },
+      });
+    }
+  };
+
+  const createNewTicToe = (roomId) => {
+    if (roomId) {
+      createTicToe({
+        variables: {
+          room_id: roomId,
+        },
       });
     }
   };
