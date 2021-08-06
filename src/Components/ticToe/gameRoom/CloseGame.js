@@ -3,6 +3,7 @@ import { useQuery, useMutation, gql } from "@apollo/client";
 import { Button, Modal } from "react-bootstrap";
 import { useParams } from "react-router";
 import { useHistory } from "react-router";
+import { useSubscription } from "@apollo/react-hooks";
 
 const CloseGame = () => {
   const [show, setShow] = useState(false);
@@ -31,13 +32,31 @@ const CloseGame = () => {
     }
   );
 
+  const { data: getTicToe } = useSubscription(
+    gql`
+      subscription GetIdTicToe($room_id: Int!) {
+        tic_toe(where: { room_id: { _eq: $room_id } }) {
+          id
+        }
+      }
+    `,
+    {
+      variables: {
+        room_id: id,
+      },
+    }
+  );
+
   const [closeRoomGame] = useMutation(
     gql`
-      mutation JoinToGame($id: Int!, $game_id: Int!) {
+      mutation JoinToGame($id: Int!, $game_id: Int!, $tic_toe_id: Int!) {
         delete_game(where: { id: { _eq: $id } }) {
           affected_rows
         }
         delete_room(where: { game_id: { _eq: $game_id } }) {
+          affected_rows
+        }
+        delete_tic_toe(where: { id: { _eq: $tic_toe_id } }) {
           affected_rows
         }
       }
@@ -77,6 +96,7 @@ const CloseGame = () => {
           variables: {
             id: gameId,
             game_id: gameId,
+            tic_toe_id: ticToeId,
           },
         });
         history.push({ pathname: "/list-of-games" });
@@ -103,6 +123,7 @@ const CloseGame = () => {
 
   const ownerGameId = data?.room[0].owner_game;
   const joinedGameId = data?.room[0].joined_game;
+  const ticToeId = getTicToe?.tic_toe[0]?.id;
 
   return (
     <div className="closeGame">
