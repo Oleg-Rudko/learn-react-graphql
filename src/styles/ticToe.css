@@ -130,6 +130,11 @@
   background: #fff;
 }
 
+.field_row-disabled {
+  pointer-events: none;
+  opacity: 0, 7;
+}
+
 .gameNavigation {
   width: 40%;
   border: 1px solid #fff;

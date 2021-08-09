@@ -41,4 +41,4 @@ const GameRoom = () => {
   );
 };
 
-export default GameRoom;
+export default React.memo(GameRoom);
