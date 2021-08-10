@@ -34,7 +34,7 @@ const GameRoom = () => {
   return (
     <div className="gameRoom">
       <div className="gameRoom_wrap">
-        <PlayingField dataRoom={dataUsers} />
+        <PlayingField />
         <GameNavigation dataUsers={dataUsers} />
       </div>
     </div>

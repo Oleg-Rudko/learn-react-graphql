@@ -71,6 +71,16 @@ const CloseGame = () => {
         $joined_game_name: String!
         $joined_game_ready: Boolean
         $move_game: Int
+        $idTicToe: Int
+        $row_1: Int
+        $row_2: Int
+        $row_3: Int
+        $row_4: Int
+        $row_5: Int
+        $row_6: Int
+        $row_7: Int
+        $row_8: Int
+        $row_9: Int
       ) {
         update_room(
           where: { id: { _eq: $id } }
@@ -79,6 +89,22 @@ const CloseGame = () => {
             joined_game_name: $joined_game_name
             joined_game_ready: $joined_game_ready
             move_game: $move_game
+          }
+        ) {
+          affected_rows
+        }
+        update_tic_toe(
+          where: { id: { _eq: $idTicToe } }
+          _set: {
+            row_1: $row_1
+            row_2: $row_2
+            row_3: $row_3
+            row_4: $row_4
+            row_5: $row_5
+            row_6: $row_6
+            row_7: $row_7
+            row_8: $row_8
+            row_9: $row_9
           }
         ) {
           affected_rows
@@ -104,6 +130,16 @@ const CloseGame = () => {
     } else if (confirmBtn === "leave") {
       leaveTheRoom({
         variables: {
+          idTicToe: ticToeId,
+          row_1: null,
+          row_2: null,
+          row_3: null,
+          row_4: null,
+          row_5: null,
+          row_6: null,
+          row_7: null,
+          row_8: null,
+          row_9: null,
           id: id,
           joined_game: null,
           joined_game_name: "",

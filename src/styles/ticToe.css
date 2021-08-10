@@ -127,6 +127,7 @@
   border: 1px solid #333;
   width: 110px;
   height: 110px;
+  cursor: pointer;
   background: #fff;
 }
 

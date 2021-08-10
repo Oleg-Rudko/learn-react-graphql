@@ -3,42 +3,46 @@ import { useMutation, gql } from "@apollo/client";
 import { useSubscription } from "@apollo/react-hooks";
 import { useParams } from "react-router";
 
-const PlayingField = ({ dataRoom }) => {
-  const [arrField, setArrField] = useState();
+const PlayingField = () => {
   const { id } = useParams();
-  const userMoveGameId = dataRoom?.move_game;
-  const currentUserId = JSON.parse(window.localStorage.getItem("user_id"));
-
   const { data } = useSubscription(
     gql`
-      subscription GetFieldsTicToe($room_id: Int!) {
-        tic_toe(where: { room_id: { _eq: $room_id } }) {
-          row_1
-          row_2
-          row_3
-          row_4
-          row_5
-          row_6
-          row_7
-          row_8
-          row_9
+      subscription GetPlayersData($id: Int!, $room_id: Int!) {
+        room(
+          where: { id: { _eq: $id }, tic_toe: { room_id: { _eq: $room_id } } }
+        ) {
+          id
+          move_game
+          owner_game
+          joined_game
+          game_symbol
+          tic_toe {
+            row_1
+            row_2
+            row_3
+            row_4
+            row_5
+            row_6
+            row_7
+            row_8
+            row_9
+          }
         }
       }
     `,
     {
       variables: {
         room_id: id,
+        id: id,
       },
     }
   );
-
-  useEffect(() => {
-    console.log(data, "playing field data");
-  }, [data]);
-
   const [putMoveGame] = useMutation(
     gql`
       mutation PutMoveGame(
+        $id: Int!
+        $move_game: Int
+        $game_symbol: Int
         $room_id: Int!
         $row_1: Int
         $row_2: Int
@@ -66,35 +70,67 @@ const PlayingField = ({ dataRoom }) => {
         ) {
           affected_rows
         }
+        update_room(
+          where: { id: { _eq: $id } }
+          _set: { move_game: $move_game, game_symbol: $game_symbol }
+        ) {
+          affected_rows
+        }
       }
     `
   );
-
-  const makeMove = (index) => {
-    putMoveGame({
-      variables: {
-        room_id: id,
-        row_1: arrField?.row_1,
-        row_2: arrField?.row_2,
-        row_3: arrField?.row_3,
-        row_4: arrField?.row_4,
-        row_5: arrField?.row_5,
-        row_6: arrField?.row_6,
-        row_7: arrField?.row_7,
-        row_8: arrField?.row_8,
-        row_9: arrField?.row_9,
-      },
-    });
-  };
+  const [arrField, setArrField] = useState();
+  // const [gameSymbol, setGameSymbol] = useState("X");
+  const [hasuraSymbol, setHasuraSymbol] = useState(1);
+  const getGameSymbol = data?.room[0].game_symbol;
+  const currentUserId = JSON.parse(window.localStorage.getItem("user_id"));
+  const userMoveGameId = data?.room[0]?.move_game;
+  const joinedGame = data?.room[0]?.joined_game;
+  const ownerGame = data?.room[0]?.owner_game;
+  // console.log(gameSymbol, "user move game id");
 
   useEffect(() => {
-    const fields = data?.tic_toe[0];
+    conversionToGameSymbol();
+  }, [data]);
+
+  const conversionToGameSymbol = () => {
+    const fields = data?.room[0]?.tic_toe[0];
     if (fields) {
       const arrOfFields = Object.entries(fields);
       arrOfFields.pop();
       setArrField(arrOfFields);
     }
-  }, [data]);
+  };
+
+  const validationSymbols = () => {
+    if (getGameSymbol === 1) {
+      setHasuraSymbol(0);
+    } else if (getGameSymbol === 0) {
+      setHasuraSymbol(1);
+    }
+  };
+
+  const makeMove = (index) => {
+    validationSymbols();
+
+    putMoveGame({
+      variables: {
+        id: id,
+        move_game: userMoveGameId === ownerGame ? joinedGame : ownerGame,
+        game_symbol: hasuraSymbol,
+        room_id: id,
+        row_1: arrField[0][0] === index ? hasuraSymbol : arrField[0][1],
+        row_2: arrField[1][0] === index ? hasuraSymbol : arrField[1][1],
+        row_3: arrField[2][0] === index ? hasuraSymbol : arrField[2][1],
+        row_4: arrField[3][0] === index ? hasuraSymbol : arrField[3][1],
+        row_5: arrField[4][0] === index ? hasuraSymbol : arrField[4][1],
+        row_6: arrField[5][0] === index ? hasuraSymbol : arrField[5][1],
+        row_7: arrField[6][0] === index ? hasuraSymbol : arrField[6][1],
+        row_8: arrField[7][0] === index ? hasuraSymbol : arrField[7][1],
+        row_9: arrField[8][0] === index ? hasuraSymbol : arrField[8][1],
+      },
+    });
+  };
 
   return (
     <div className="playingField">
@@ -104,10 +140,10 @@ const PlayingField = ({ dataRoom }) => {
             key={item[0]}
             onClick={() => makeMove(item[0])}
             className={`${
-              userMoveGameId === currentUserId ? "field_row-disabled" : null
+              userMoveGameId !== currentUserId ? "field_row-disabled" : null
             } field_row`}
           >
-            {item[1]}
+            {item[1] === null ? item[1] : item[1] === 1 ? "X" : "0"}
           </div>
         ))}
       </div>
@@ -115,4 +151,4 @@ const PlayingField = ({ dataRoom }) => {
   );
 };
 
-export default PlayingField;
+export default React.memo(PlayingField);
