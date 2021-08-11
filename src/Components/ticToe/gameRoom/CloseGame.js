@@ -70,6 +70,7 @@ const CloseGame = () => {
         $joined_game: Int
         $joined_game_name: String!
         $joined_game_ready: Boolean
+        $game_symbol: Int
         $move_game: Int
         $idTicToe: Int
         $row_1: Int
@@ -89,6 +90,7 @@ const CloseGame = () => {
             joined_game_name: $joined_game_name
             joined_game_ready: $joined_game_ready
             move_game: $move_game
+            game_symbol: $game_symbol
           }
         ) {
           affected_rows
@@ -145,6 +147,7 @@ const CloseGame = () => {
           joined_game_name: "",
           joined_game_ready: false,
           move_game: null,
+          game_symbol: 1,
         },
       });
       history.push({ pathname: "/list-of-games" });

@@ -103,6 +103,8 @@ const PlayingField = () => {
   };
 
   const validationSymbols = () => {
+    // game symbol 1 === "X"
+    // game symbol 0 === "0"
     if (getGameSymbol === 1) {
       setHasuraSymbol(0);
     } else if (getGameSymbol === 0) {
