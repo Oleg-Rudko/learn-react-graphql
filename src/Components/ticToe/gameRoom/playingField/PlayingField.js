@@ -80,18 +80,31 @@ const PlayingField = () => {
     `
   );
   const [arrField, setArrField] = useState();
-  // const [gameSymbol, setGameSymbol] = useState("X");
+  const [downloadSymbol, setDownloadSymbol] = useState({
+    first: false,
+    second: false,
+  });
   const [hasuraSymbol, setHasuraSymbol] = useState(1);
-  const getGameSymbol = data?.room[0].game_symbol;
+  const getGameSymbol = data?.room[0]?.game_symbol;
   const currentUserId = JSON.parse(window.localStorage.getItem("user_id"));
   const userMoveGameId = data?.room[0]?.move_game;
   const joinedGame = data?.room[0]?.joined_game;
   const ownerGame = data?.room[0]?.owner_game;
-  // console.log(gameSymbol, "user move game id");
 
   useEffect(() => {
     conversionToGameSymbol();
+    if (!joinedGame) {
+      setDownloadSymbol((prev) => ({
+        ...prev,
+        first: false,
+        second: false,
+      }));
+    }
   }, [data]);
+
+  useEffect(() => {
+    validationSymbols(getGameSymbol);
+  }, [getGameSymbol]);
 
   const conversionToGameSymbol = () => {
     const fields = data?.room[0]?.tic_toe[0];
@@ -102,19 +115,27 @@ const PlayingField = () => {
     }
   };
 
-  const validationSymbols = () => {
-    // game symbol 1 === "X"
-    // game symbol 0 === "0"
-    if (getGameSymbol === 1) {
-      setHasuraSymbol(0);
-    } else if (getGameSymbol === 0) {
-      setHasuraSymbol(1);
+  const validationSymbols = (symbol) => {
+    if (downloadSymbol.first && downloadSymbol.second) {
+      if (symbol === 1) {
+        setHasuraSymbol(0);
+      } else if (symbol === 0) {
+        setHasuraSymbol(1);
+      }
+    } else if (!downloadSymbol.first) {
+      setDownloadSymbol((prev) => ({
+        ...prev,
+        first: true,
+      }));
+    } else if (!downloadSymbol.second) {
+      setDownloadSymbol((prev) => ({
+        ...prev,
+        second: true,
+      }));
     }
   };
 
   const makeMove = (index) => {
-    validationSymbols();
-
     putMoveGame({
       variables: {
         id: id,

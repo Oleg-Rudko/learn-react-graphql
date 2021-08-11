@@ -129,6 +129,10 @@
   height: 110px;
   cursor: pointer;
   background: #fff;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .field_row-disabled {
