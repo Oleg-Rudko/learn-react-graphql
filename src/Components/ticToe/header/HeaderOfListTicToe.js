@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { HouseDoor } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 
-const HeaderOfListTicToe = ({ data, dataUser }) => {
+const HeaderOfListTicToe = ({ dataUser }) => {
   return (
     <div className="headerTicToe">
       <Link to="/">
@@ -13,7 +13,7 @@ const HeaderOfListTicToe = ({ data, dataUser }) => {
         </Button>
       </Link>
 
-      <CreateGame data={data} dataUser={dataUser} />
+      <CreateGame dataUser={dataUser} />
     </div>
   );
 };

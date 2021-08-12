@@ -49,7 +49,7 @@ const ListOfGames = () => {
         } warning`}
       ></div>
       <div className="listOfGames_wrap">
-        <HeaderOfListTicToe data={data} dataUser={dataUser} />
+        <HeaderOfListTicToe dataUser={dataUser} />
         <BodyOfListTicToe gamesAndRooms={data} loading={loading} />
       </div>
     </div>

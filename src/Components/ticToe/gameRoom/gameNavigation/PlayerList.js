@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "../../../Loader";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import { useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 const PlayerList = ({ dataUsers }) => {
-  // console.log(dataUsers);
   const currentUserId = useSelector(userId);
   const ownerName = dataUsers?.owner_game_name;
   const ownerId = dataUsers?.owner_game;
@@ -76,12 +75,15 @@ const PlayerList = ({ dataUsers }) => {
     });
   };
 
-  if (dataUsers?.joined_game_ready && dataUsers.owner_game_ready) {
-    moveGame();
-  }
+  useEffect(() => {
+    if (ownerGameReady && joinedGameReady) {
+      moveGame();
+    }
+  }, [ownerGameReady, joinedGameReady]);
 
   // Develop button before deploy button will be deleted
   const reset = () => {
+    console.log("call reset");
     updateUserReadyPlay({
       variables: {
         id: id,
@@ -123,8 +125,10 @@ const PlayerList = ({ dataUsers }) => {
 
       {!joinedId ? (
         <div className="playersList_item playersList_item-waiting">
-          {loaderForWaiting.map(() => (
-            <Loader animation="grow" variant="info" size="sm" />
+          {loaderForWaiting.map((_, idx) => (
+            <div key={idx}>
+              <Loader animation="grow" variant="info" size="sm" />
+            </div>
           ))}
         </div>
       ) : (
