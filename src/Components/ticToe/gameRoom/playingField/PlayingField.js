@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useSubscription } from "@apollo/react-hooks";
 import { useParams } from "react-router";
@@ -80,10 +80,6 @@ const PlayingField = () => {
     `
   );
   const [arrField, setArrField] = useState();
-  const [downloadSymbol, setDownloadSymbol] = useState({
-    first: false,
-    second: false,
-  });
   const [hasuraSymbol, setHasuraSymbol] = useState(1);
   const getGameSymbol = data?.room[0]?.game_symbol;
   const currentUserId = JSON.parse(window.localStorage.getItem("user_id"));
@@ -91,47 +87,32 @@ const PlayingField = () => {
   const joinedGame = data?.room[0]?.joined_game;
   const ownerGame = data?.room[0]?.owner_game;
 
-  useEffect(() => {
-    conversionToGameSymbol();
-    if (!joinedGame) {
-      setDownloadSymbol((prev) => ({
-        ...prev,
-        first: false,
-        second: false,
-      }));
-    }
-  }, [data]);
-
-  useEffect(() => {
-    validationSymbols(getGameSymbol);
-  }, [getGameSymbol]);
-
-  const conversionToGameSymbol = () => {
+  const conversionToGameSymbol = useCallback(() => {
     const fields = data?.room[0]?.tic_toe[0];
     if (fields) {
       const arrOfFields = Object.entries(fields);
       arrOfFields.pop();
       setArrField(arrOfFields);
     }
-  };
+  }, [data]);
+
+  useEffect(() => {
+    conversionToGameSymbol();
+  }, [conversionToGameSymbol, joinedGame]);
+
+  useEffect(() => {
+    if (getGameSymbol !== null && getGameSymbol !== undefined) {
+      validationSymbols(getGameSymbol);
+    }
+  }, [getGameSymbol]);
 
   const validationSymbols = (symbol) => {
-    if (downloadSymbol.first && downloadSymbol.second) {
-      if (symbol === 1) {
-        setHasuraSymbol(0);
-      } else if (symbol === 0) {
-        setHasuraSymbol(1);
-      }
-    } else if (!downloadSymbol.first) {
-      setDownloadSymbol((prev) => ({
-        ...prev,
-        first: true,
-      }));
-    } else if (!downloadSymbol.second) {
-      setDownloadSymbol((prev) => ({
-        ...prev,
-        second: true,
-      }));
+    if (symbol === 1) {
+      setHasuraSymbol(0);
+    }
+
+    if (symbol === 0) {
+      setHasuraSymbol(1);
     }
   };
 

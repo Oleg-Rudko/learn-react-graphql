@@ -147,7 +147,7 @@ const CloseGame = () => {
           joined_game_name: "",
           joined_game_ready: false,
           move_game: null,
-          game_symbol: 1,
+          game_symbol: null,
         },
       });
       history.push({ pathname: "/list-of-games" });
