@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Loader from "../../../Loader";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -61,7 +61,7 @@ const PlayerList = ({ dataUsers }) => {
     }
   };
 
-  const moveGame = () => {
+  const moveGame = useCallback(() => {
     const arrUsersReady = [ownerId, joinedId];
     const randomElement =
       arrUsersReady[Math.floor(Math.random() * arrUsersReady.length)];
@@ -73,13 +73,20 @@ const PlayerList = ({ dataUsers }) => {
         move_game: randomElement,
       },
     });
-  };
+  }, [
+    ownerGameReady,
+    joinedGameReady,
+    id,
+    joinedId,
+    ownerId,
+    updateUserReadyPlay,
+  ]);
 
   useEffect(() => {
     if (ownerGameReady && joinedGameReady) {
       moveGame();
     }
-  }, [ownerGameReady, joinedGameReady]);
+  }, [ownerGameReady, joinedGameReady, moveGame]);
 
   // Develop button before deploy button will be deleted
   const reset = () => {
