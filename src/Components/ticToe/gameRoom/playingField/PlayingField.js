@@ -86,19 +86,35 @@ const PlayingField = () => {
   const userMoveGameId = data?.room[0]?.move_game;
   const joinedGame = data?.room[0]?.joined_game;
   const ownerGame = data?.room[0]?.owner_game;
+  const fields = data?.room[0]?.tic_toe[0];
+  const winningCombo = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 5, 9],
+    [3, 5, 7],
+  ];
 
-  const conversionToGameSymbol = useCallback(() => {
-    const fields = data?.room[0]?.tic_toe[0];
+  useEffect(() => {
+    if (arrField) {
+      console.log(arrField, "arr fields is here");
+    }
+  }, [arrField]);
+
+  const conversionToGameSymbol = useCallback((fields) => {
     if (fields) {
       const arrOfFields = Object.entries(fields);
       arrOfFields.pop();
       setArrField(arrOfFields);
     }
-  }, [data]);
+  }, []);
 
   useEffect(() => {
-    conversionToGameSymbol();
-  }, [conversionToGameSymbol, joinedGame]);
+    conversionToGameSymbol(fields);
+  }, [fields, conversionToGameSymbol]);
 
   useEffect(() => {
     if (getGameSymbol !== null && getGameSymbol !== undefined) {
