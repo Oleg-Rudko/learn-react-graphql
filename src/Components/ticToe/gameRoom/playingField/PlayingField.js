@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useSubscription } from "@apollo/react-hooks";
 import { useParams } from "react-router";
@@ -88,33 +88,46 @@ const PlayingField = () => {
   const ownerGame = data?.room[0]?.owner_game;
   const fields = data?.room[0]?.tic_toe[0];
   const winningCombo = [
+    [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    [3, 6, 9],
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [1, 5, 9],
-    [3, 5, 7],
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 4, 8],
+    [2, 4, 6],
   ];
 
-  useEffect(() => {
-    if (arrField) {
-      console.log(arrField, "arr fields is here");
-    }
-  }, [arrField]);
+  const checkWinningCombo = () => {
+    winningCombo.map((item) => {
+      if (typeof arrField[item[0]][1] === "number") {
+        if (
+          String(arrField[item[0]][1]) === String(arrField[item[1]][1]) &&
+          String(arrField[item[1]][1]) === String(arrField[item[2]][1])
+        ) {
+          console.log("winner");
+        }
+      }
+    });
+  };
 
-  const conversionToGameSymbol = useCallback((fields) => {
+  const conversionToGameSymbol = (fields) => {
     if (fields) {
       const arrOfFields = Object.entries(fields);
       arrOfFields.pop();
       setArrField(arrOfFields);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (arrField) {
+      checkWinningCombo();
+    }
+  }, [arrField]);
 
   useEffect(() => {
     conversionToGameSymbol(fields);
-  }, [fields, conversionToGameSymbol]);
+  }, [fields]); // re-rendering for this depending
 
   useEffect(() => {
     if (getGameSymbol !== null && getGameSymbol !== undefined) {
