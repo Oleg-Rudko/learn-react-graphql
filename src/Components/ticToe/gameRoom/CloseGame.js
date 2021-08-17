@@ -82,6 +82,7 @@ const CloseGame = () => {
         $row_7: Int
         $row_8: Int
         $row_9: Int
+        $winner_name: String
       ) {
         update_room(
           where: { id: { _eq: $id } }
@@ -91,6 +92,7 @@ const CloseGame = () => {
             joined_game_ready: $joined_game_ready
             move_game: $move_game
             game_symbol: $game_symbol
+            winner_name: $winner_name
           }
         ) {
           affected_rows
@@ -148,6 +150,7 @@ const CloseGame = () => {
           joined_game_ready: false,
           move_game: null,
           game_symbol: null,
+          winner_name: "",
         },
       });
       history.push({ pathname: "/list-of-games" });

@@ -15,6 +15,9 @@ const PlayingField = () => {
           move_game
           owner_game
           joined_game
+          joined_game_name
+          owner_game_name
+          winner_name
           game_symbol
           tic_toe {
             row_1
@@ -53,6 +56,7 @@ const PlayingField = () => {
         $row_7: Int
         $row_8: Int
         $row_9: Int
+        $winner_name: String
       ) {
         update_tic_toe(
           where: { room_id: { _eq: $room_id } }
@@ -72,7 +76,11 @@ const PlayingField = () => {
         }
         update_room(
           where: { id: { _eq: $id } }
-          _set: { move_game: $move_game, game_symbol: $game_symbol }
+          _set: {
+            move_game: $move_game
+            game_symbol: $game_symbol
+            winner_name: $winner_name
+          }
         ) {
           affected_rows
         }
@@ -81,10 +89,13 @@ const PlayingField = () => {
   );
   const [arrField, setArrField] = useState();
   const [hasuraSymbol, setHasuraSymbol] = useState(1);
+  const [winnerName, setWinnerName] = useState("");
   const getGameSymbol = data?.room[0]?.game_symbol;
   const currentUserId = JSON.parse(window.localStorage.getItem("user_id"));
   const userMoveGameId = data?.room[0]?.move_game;
   const joinedGame = data?.room[0]?.joined_game;
+  const joinedGameName = data?.room[0]?.joined_game_name;
+  const ownerGameName = data?.room[0]?.owner_game_name;
   const ownerGame = data?.room[0]?.owner_game;
   const fields = data?.room[0]?.tic_toe[0];
   const winningCombo = [
@@ -105,7 +116,27 @@ const PlayingField = () => {
           String(arrField[item[0]][1]) === String(arrField[item[1]][1]) &&
           String(arrField[item[1]][1]) === String(arrField[item[2]][1])
         ) {
-          console.log("winner");
+          if (userMoveGameId === currentUserId) {
+            ownerGame === currentUserId
+              ? setWinnerName(joinedGameName)
+              : setWinnerName(ownerGameName);
+
+            // console.log(
+            //   `${
+            //     ownerGame === currentUserId ? joinedGameName : ownerGameName
+            //   } winner`
+            // );
+          } else if (userMoveGameId !== currentUserId) {
+            ownerGame === currentUserId
+              ? setWinnerName(ownerGameName)
+              : setWinnerName(joinedGameName);
+
+            // console.log(
+            //   `${
+            //     ownerGame === currentUserId ? ownerGameName : joinedGameName
+            //   } winner`
+            // );
+          }
         }
       }
     });
@@ -149,6 +180,7 @@ const PlayingField = () => {
     putMoveGame({
       variables: {
         id: id,
+        winner_name: winnerName,
         move_game: userMoveGameId === ownerGame ? joinedGame : ownerGame,
         game_symbol: hasuraSymbol,
         room_id: id,

@@ -1,6 +1,5 @@
 import React from "react";
-import { useSubscription } from "@apollo/react-hooks";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql, useQuery } from "@apollo/client";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 
@@ -8,9 +7,9 @@ const ItemOfListGame = ({ name, room }) => {
   const currentUserId = JSON.parse(localStorage.getItem("user_id"));
   const history = useHistory();
 
-  const { data: getUserName } = useSubscription(
+  const { data: getUserName } = useQuery(
     gql`
-      subscription GetListOfGames($id: Int) {
+      query GetListOfGames($id: Int) {
         users(where: { id: { _eq: $id } }) {
           name
         }
@@ -22,7 +21,7 @@ const ItemOfListGame = ({ name, room }) => {
       },
     }
   );
-  const currentUserName = getUserName?.users[0].name;
+  const currentUserName = getUserName?.users[0]?.name;
 
   const [updateJoinToGame] = useMutation(
     gql`

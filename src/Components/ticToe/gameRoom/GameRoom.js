@@ -19,6 +19,7 @@ const GameRoom = () => {
           owner_game_ready
           joined_game_ready
           move_game
+          winner_name
         }
       }
     `,
@@ -30,6 +31,7 @@ const GameRoom = () => {
   );
 
   const dataUsers = data?.room[0];
+  const winnerName = data?.room[0]?.winner_name;
 
   return (
     <div className="gameRoom">
@@ -37,6 +39,7 @@ const GameRoom = () => {
         <PlayingField />
         <GameNavigation dataUsers={dataUsers} />
       </div>
+      {winnerName?.length > 0 && <div>Winner user {winnerName}</div>}
     </div>
   );
 };
