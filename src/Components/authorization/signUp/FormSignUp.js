@@ -125,7 +125,7 @@ const FormSignUp = () => {
   return (
     <div className="pageForm_sign-up">
       {loadingPage ? (
-        <div className="formSingUp_loader">
+        <div className="formSingUp_loader" data-cy="sin-up-loader">
           <Loader animation="border" variant="success" />
         </div>
       ) : (
@@ -134,6 +134,7 @@ const FormSignUp = () => {
             <Form.Group>
               <Form.Label className="formSignUp_label">Your name</Form.Label>
               <Form.Control
+                data-cy="sing-up-name"
                 placeholder="Your name"
                 onChange={onHandleInput}
                 name="name"
@@ -148,6 +149,7 @@ const FormSignUp = () => {
                 Email address
               </Form.Label>
               <Form.Control
+                data-cy="sing-up-email"
                 placeholder="Enter email"
                 onChange={onHandleInput}
                 name="email"
@@ -160,6 +162,7 @@ const FormSignUp = () => {
             <Form.Group>
               <Form.Label className="formSignUp_label">Password</Form.Label>
               <Form.Control
+                data-cy="sing-up-password"
                 placeholder="Password"
                 onChange={onHandleInput}
                 name="password"
@@ -183,6 +186,7 @@ const FormSignUp = () => {
                 Repeat password
               </Form.Label>
               <Form.Control
+                data-cy="sing-up-password-verification"
                 placeholder="Password"
                 onChange={onHandleInput}
                 name="passwordVerification"
@@ -195,6 +199,7 @@ const FormSignUp = () => {
             <Form.Group>
               <Form.Label className="formSignUp_label">Age</Form.Label>
               <Form.Control
+                data-cy="sing-up-age"
                 placeholder="Enter your age"
                 onChange={onHandleInput}
                 name="age"
@@ -206,6 +211,7 @@ const FormSignUp = () => {
             <Form.Group>
               <Form.Label className="formSignUp_label">City</Form.Label>
               <Form.Control
+                data-cy="sing-up-city"
                 placeholder="Enter your City"
                 onChange={onHandleInput}
                 name="city"
