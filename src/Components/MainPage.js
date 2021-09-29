@@ -7,12 +7,20 @@ const MainPage = () => {
   return (
     <div className="mainPage">
       <Link to="/login">
-        <Button variant="outline-info" className="mainPage_login">
+        <Button
+          data-cy="login"
+          variant="outline-info"
+          className="mainPage_login"
+        >
           Login
         </Button>
       </Link>
       <Link to="/sign-up">
-        <Button variant="outline-success" className="mainPage_sing-up">
+        <Button
+          data-cy="sing-up"
+          variant="outline-success"
+          className="mainPage_sing-up"
+        >
           Sing Up
         </Button>
       </Link>
